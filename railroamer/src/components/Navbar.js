@@ -1,0 +1,18 @@
+import Link from 'next/link';
+import styles from '../../public/StyleSheet/Navbar.module.css';
+
+export default function Navbar() {
+  return (
+    <nav className={styles.navbar}>
+   <Link href="/"> <div className={styles.logo}>Railroamer</div></Link>  
+      <div className={styles.navLinks}>
+        <Link href="/" className={styles.navLink}>Home</Link>
+        <Link href="/trains" className={styles.navLink}>Train</Link>
+        <Link href="/train-status" className={styles.navLink}>Train - status</Link>
+        <Link href="/book" className={styles.navLink}>Book</Link>
+        <Link href="/profile" className={styles.navLink}>Profile</Link>
+        <Link href="/login" className={styles.navLink}>Login</Link>
+      </div>
+    </nav>
+  );
+}
