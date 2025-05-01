@@ -1,75 +1,59 @@
-//frontend/pages/login.js
+// pages/login.js
 import { useState } from 'react';
-import api from '../utils/api';
 import { useRouter } from 'next/router';
-import Navbar from '../components/Navbar';
-import styles from '../../public/StyleSheet/Login.module.css';
+import axios from 'axios';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 export default function Login() {
-  const [isRegister, setIsRegister] = useState(false);
-  const [form, setForm] = useState({ name: '', email: '', password: '' });
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [role, setRole] = useState('USER');
   const router = useRouter();
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const endpoint = isRegister ? '/auth/register' : '/auth/login';
-      const { data } = await api.post(endpoint, form);
-      localStorage.setItem('token', data.token);
-      router.push('/');
+      const endpoint = role === 'USER' ? 'http://localhost:5000/api/auth/user/login' : '/api/auth/provider-login';
+      const res = await axios.post(endpoint, { email, password });
+      localStorage.setItem('token', res.data.token);
+      router.push(role === 'USER' ? '/profile' : '/provider/profile');
     } catch (err) {
-      alert(err.response?.data?.message || 'Error');
+      alert('Login failed');
     }
   };
 
   return (
     <>
-      <Navbar />
-      <div className={styles.container}>
-        <div className={styles.formWrapper}>
-          <h2 className={styles.title}>{isRegister ? 'Register' : 'Login'}</h2>
-          <form onSubmit={handleSubmit}>
-            {isRegister && (
-              <input
-                type="text"
-                placeholder="Name"
-                className={styles.input}
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                required
-              />
-            )}
-            <input
-              type="email"
-              placeholder="Email"
-              className={styles.input}
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-              required
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              className={styles.input}
-              value={form.password}
-              onChange={(e) => setForm({ ...form, password: e.target.value })}
-              required
-            />
-            <button className={styles.button}>
-              {isRegister ? 'Register' : 'Login'}
-            </button>
-          </form>
-          <p className={styles.toggleText}>
-            {isRegister ? 'Already have an account?' : 'No account yet?'}{' '}
-            <button
-              onClick={() => setIsRegister(!isRegister)}
-              className={styles.toggleLink}
-            >
-              {isRegister ? 'Login' : 'Register'}
-            </button>
-          </p>
-        </div>
-      </div>
+    <Navbar/>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <form onSubmit={handleLogin} className="bg-white p-8 rounded shadow-md w-96 space-y-4">
+        <h1 className="text-2xl font-bold text-center">Login</h1>
+        <select value={role} onChange={(e) => setRole(e.target.value)} className="w-full border px-3 py-2">
+          <option value="USER">User</option>
+          <option value="PROVIDER">Provider</option>
+        </select>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full border px-3 py-2"
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-full border px-3 py-2"
+        />
+        <button type="submit" className="bg-blue-600 text-white px-4 py-2 w-full rounded">
+          Login
+        </button>
+      </form>
+    </div>
+    <Footer/>
     </>
-  );
+     );
 }
+

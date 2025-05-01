@@ -1,5 +1,6 @@
 import Navbar from '../components/Navbar';
 import styles from '../../public/StyleSheet/Home.module.css';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <div className={styles.heroSection}>
         <h1 className={styles.heroTitle}>Welcome to Railroamer🚂</h1>
       </div>
+      <Footer/>
     </>
   );
 }

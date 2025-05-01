@@ -1,0 +1,286 @@
+/* Footer Styles */
+.footer {
+    background-color: #0a2463;
+    color: #ffffff;
+    padding-top: 3rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  
+  .footer-section {
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .footer-heading {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #ffffff;
+  }
+  
+  .footer-description {
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    color: #e0e0e0;
+  }
+  
+  .footer-social {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    transition: all 0.3s ease;
+  }
+  
+  .social-icon:hover {
+    background-color: #ff6b6b;
+    transform: translateY(-3px);
+  }
+  
+  .footer-subheading {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #ffffff;
+  }
+  
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-links li {
+    margin-bottom: 0.75rem;
+  }
+  
+  .footer-links a {
+    color: #e0e0e0;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    display: inline-block;
+  }
+  
+  .footer-links a:hover {
+    color: #ff6b6b;
+    text-decoration: underline;
+  }
+  
+  .footer-contact {
+    font-style: normal;
+    line-height: 1.8;
+  }
+  
+  .footer-contact p {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    color: #e0e0e0;
+  }
+  
+  .contact-icon {
+    margin-right: 0.5rem;
+    color: #ff6b6b;
+  }
+  
+  .footer-contact a {
+    color: #e0e0e0;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .footer-contact a:hover {
+    color: #ff6b6b;
+    text-decoration: underline;
+  }
+  
+  .footer-bottom {
+    margin-top: 3rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .footer-legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .copyright {
+    color: #a0a0a0;
+    font-size: 0.875rem;
+  }
+  
+  .legal-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .legal-links a {
+    color: #a0a0a0;
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .legal-links a:hover {
+    color: #ff6b6b;
+    text-decoration: underline;
+  }
+  
+  .footer-app {
+    margin-top: 1rem;
+  }
+  
+  .footer-app p {
+    font-size: 0.875rem;
+    color: #e0e0e0;
+    margin-bottom: 0.5rem;
+  }
+  
+  .app-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .app-button {
+    display: block;
+    transition: transform 0.2s ease;
+  }
+  
+  .app-button:hover {
+    transform: translateY(-3px);
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .footer-container {
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+  
+    .footer-section {
+      width: 100%;
+    }
+  
+    .footer-legal {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+  
+    .legal-links {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+  
+  /* Alternative Theme - Light */
+  .footer-light {
+    background-color: #f5f7fa;
+    color: #333333;
+  }
+  
+  .footer-light .footer-heading,
+  .footer-light .footer-subheading {
+    color: #0a2463;
+  }
+  
+  .footer-light .footer-description,
+  .footer-light .footer-links a,
+  .footer-light .footer-contact p,
+  .footer-light .footer-contact a {
+    color: #555555;
+  }
+  
+  .footer-light .social-icon {
+    background-color: rgba(10, 36, 99, 0.1);
+    color: #0a2463;
+  }
+  
+  .footer-light .social-icon:hover,
+  .footer-light .contact-icon {
+    color: #ff6b6b;
+  }
+  
+  .footer-light .footer-bottom {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .footer-light .copyright,
+  .footer-light .legal-links a {
+    color: #777777;
+  }
+  
+  /* Alternative Theme - Dark Modern */
+  .footer-dark-modern {
+    background-color: #121212;
+    color: #f5f5f5;
+  }
+  
+  .footer-dark-modern .footer-container {
+    padding-top: 1rem;
+  }
+  
+  .footer-dark-modern .footer-heading {
+    color: #4cc9f0;
+    font-weight: 800;
+  }
+  
+  .footer-dark-modern .footer-subheading {
+    color: #4cc9f0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+  }
+  
+  .footer-dark-modern .social-icon {
+    background-color: #333333;
+  }
+  
+  .footer-dark-modern .social-icon:hover {
+    background-color: #4cc9f0;
+    color: #121212;
+  }
+  
+  .footer-dark-modern .footer-links a:hover,
+  .footer-dark-modern .footer-contact a:hover,
+  .footer-dark-modern .legal-links a:hover {
+    color: #4cc9f0;
+  }
+  
+  .footer-dark-modern .contact-icon {
+    color: #4cc9f0;
+  }
+  
+  .footer-dark-modern .footer-bottom {
+    background-color: #0a0a0a;
+  }
+  
