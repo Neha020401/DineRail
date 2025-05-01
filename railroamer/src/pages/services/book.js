@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import api from '../utils/api';
-import Navbar from '../components/Navbar';
-import styles from '../../public/StyleSheet/Book.module.css';
+import api from '../../utils/api';
+import Navbar from '../../components/Navbar';
+import styles from '../../../public/StyleSheet/Book.module.css';
 
 export default function Book() {
   const [form, setForm] = useState({ trainNo: '', from: '', to: '', date: '', seatType: '' });
