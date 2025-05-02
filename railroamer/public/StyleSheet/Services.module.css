@@ -1,4 +1,19 @@
-.service{
-    display: flex;
-    gap: 10px; 
-}
+.service {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two equal columns */
+    gap: 20px;
+    padding: 20px;
+    justify-items: center; /* Center each item horizontally */
+  }
+  
+  .service div {
+    padding: 20px;
+
+    padding-block: 30px;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bolder;
+    width: 80%; /* Optional: makes items align better */
+  }
+  

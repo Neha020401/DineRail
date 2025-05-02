@@ -1,34 +1,130 @@
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const pool = require('../models/db');
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const db = require("../config/db");
 
-
-exports.userSignIn = async (req, res) => {
+const userLogin = async (req, res) => {
   const { email, password } = req.body;
+  const [users] = await db.execute("SELECT * FROM users WHERE email = ?", [
+    email,
+  ]);
+
+  if (users.length === 0)
+    return res.status(400).json({ message: "User not found" });
+
+  const user = users[0];
+  const isMatch = await bcrypt.compare(password, user.password);
+
+  if (!isMatch) return res.status(401).json({ message: "Invalid credentials" });
+
+  const token = jwt.sign({ id: user.id, role: "USER" }, process.env.JWT_SECRET, {
+    expiresIn: "1d",
+  });
+  res.json({ token, user });
+};
+
+const providerLogin = async (req, res) => {
+  const { email, password } = req.body;
+  const [providers] = await db.execute(
+    "SELECT * FROM providers WHERE email = ?",
+    [email]
+  );
+
+  if (providers.length === 0)
+    return res.status(400).json({ message: "Provider not found" });
+
+  const provider = providers[0];
+  const isMatch = await bcrypt.compare(password, provider.password);
+
+  if (!isMatch) return res.status(401).json({ message: "Invalid credentials" });
+
+  const token = jwt.sign({ id: provider.id, role: "PROVIDER" }, process.env.JWT_SECRET, {
+    expiresIn: "1d",
+  });
+  res.json({ token, provider });
+};
+
+const userSignUp = async (req, res) => {
   try {
-    const [users] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
-    const user = users[0];
-    if (!user || !(await bcrypt.compare(password, user.password))) {
-      return res.status(401).json({ error: 'Invalid credentials' });
+    const { name, email, password, phone_no, dob, aadhar_card } = req.body;
+
+    // Check if user already exists
+    const [existing] = await db.execute("SELECT * FROM users WHERE email = ?", [
+      email,
+    ]);
+    if (existing.length > 0) {
+      return res.status(400).json({ message: "User already exists" });
     }
-    const token = jwt.sign({ id: user.id, type: 'user' }, process.env.JWT_SECRET, { expiresIn: '1d' });
-    res.json({ token });
-  } catch (err) {
-    res.status(500).json({ error: 'Login failed' });
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const [result] = await db.execute(
+      "INSERT INTO users (name, email, password, phone_no, dob, aadhar_card) VALUES (?, ?, ?, ?, ?, ?)",
+      [name, email, hashedPassword, phone_no, dob, aadhar_card]
+    );
+
+    const userId = result.insertId;
+    const token = jwt.sign(
+      { id: userId, role: "USER" },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" }
+    );
+
+    res.status(201).json({
+      token,
+      user: { id: userId, name, email, role: "USER" },
+    });
+  } catch (error) {
+    console.error("User Signup Error:", error);
+    res.status(500).json({ message: "Server error during user signup" });
   }
 };
 
-exports.providerSignIn = async (req, res) => {
-  const { email, password } = req.body;
+const providerSignUp = async (req, res) => {
   try {
-    const [providers] = await pool.query('SELECT * FROM providers WHERE email = ?', [email]);
-    const provider = providers[0];
-    if (!provider || !(await bcrypt.compare(password, provider.password))) {
-      return res.status(401).json({ error: 'Invalid credentials' });
+    const { name, email, password, provider_type, contact_number, gst_number, train_name, train_number, station_name } = req.body;
+
+    const [existing] = await db.execute("SELECT * FROM providers WHERE email = ?", [email]);
+    if (existing.length > 0) return res.status(400).json({ message: "Provider already exists" });
+
+    // Validate required fields based on provider_type
+    if (provider_type === "Train_Service" && (!train_name || !train_number)) {
+      return res.status(400).json({ message: "Train name and number required for Train_Service" });
     }
-    const token = jwt.sign({ id: provider.id, type: 'provider' }, process.env.JWT_SECRET, { expiresIn: '1d' });
-    res.json({ token });
-  } catch (err) {
-    res.status(500).json({ error: 'Login failed' });
+
+    if (provider_type === "Station_Vendor" && !station_name) {
+      return res.status(400).json({ message: "Station name required for Station_Vendor" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const [result] = await db.execute(
+      `INSERT INTO providers 
+        (name, email, password, provider_type, contact_number, gst_number, train_name, train_number, station_name)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [name, email, hashedPassword, provider_type, contact_number, gst_number, train_name || null, train_number || null, station_name || null]
+    );
+
+    const providerId = result.insertId;
+    const token = jwt.sign({ id: providerId, role: "PROVIDER" }, process.env.JWT_SECRET, { expiresIn: "1d" });
+
+    res.status(201).json({
+      token,
+      provider: {
+        id: providerId,
+        name,
+        email,
+        role: "PROVIDER",
+        provider_type,
+        contact_number,
+        gst_number,
+        train_name,
+        train_number,
+        station_name
+      }
+    });
+  } catch (error) {
+    console.error("Provider Signup Error:", error);
+    res.status(500).json({ message: "Server error during provider signup" });
   }
 };
+
+module.exports = { userLogin, providerLogin, userSignUp, providerSignUp };

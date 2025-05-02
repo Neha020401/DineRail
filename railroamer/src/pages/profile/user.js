@@ -1,4 +1,4 @@
-//pages/profile-user.js
+//pages/profile/user.js
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
@@ -34,6 +34,12 @@ export default function UserProfile() {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    router.push('/login');
+  };
+
+  
   const handleSave = async () => {
     try {
       await axios.put('/api/user/profile', form, {
@@ -71,6 +77,15 @@ export default function UserProfile() {
           </div>
         )}
       </div>
+      {!editing && (
+  <button
+    onClick={handleLogout}
+    className="mt-2 bg-red-600 text-white px-4 py-2 rounded w-full"
+  >
+    Logout
+  </button>
+)}
+
     </div>
     <Footer/>
     </>

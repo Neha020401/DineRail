@@ -8,10 +8,12 @@ export default function Navbar() {
       <div className={styles.navLinks}>
         <Link href="/" className={styles.navLink}>Home</Link>
         <Link href="/trains" className={styles.navLink}>Train</Link>
-        <Link href="/train-status" className={styles.navLink}>Train - status</Link>
+        <Link href="/train-status" className={styles.navLink}>Train-status</Link>
         <Link href="/services" className={styles.navLink}>Services</Link>
-        <Link href="/profile-user" className={styles.navLink}>Profile</Link>
+        <Link href="/profile/user" className={styles.navLink}>Profile-user</Link>
+        <Link href="/profile/provider" className={styles.navLink}>Profile-Provider</Link>
         <Link href="/login" className={styles.navLink}>Login</Link>
+        <Link href="/signup" className={styles.navLink}>Sign Up</Link>
       </div>
     </nav>
   );

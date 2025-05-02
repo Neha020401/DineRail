@@ -13,7 +13,7 @@ exports.getUserProfile = async (req, res) => {
 exports.updateUserProfile = async (req, res) => {
   const { name, phone, dob, aadhar, user_img } = req.body;
   try {
-    await pool.query('UPDATE users SET name=?, phone=?, dob=?, aadhar=?, user_img=? WHERE id=?', [name, phone, dob, aadhar, user_img, req.user.id]);
+    await pool.query('UPDATE users SET name=?, phone_no=?, dob=?, aadhar_card=?, user_img=? WHERE id=?', [name, phone, dob, aadhar, user_img, req.user.id]);
     res.json({ message: 'Profile updated' });
   } catch (err) {
     res.status(500).json({ error: 'Update failed' });
