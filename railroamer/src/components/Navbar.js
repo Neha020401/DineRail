@@ -10,7 +10,7 @@ export default function Navbar() {
         <Link href="/trains" className={styles.navLink}>Train</Link>
         <Link href="/train-status" className={styles.navLink}>Train - status</Link>
         <Link href="/services" className={styles.navLink}>Services</Link>
-        <Link href="/profile" className={styles.navLink}>Profile</Link>
+        <Link href="/profile-user" className={styles.navLink}>Profile</Link>
         <Link href="/login" className={styles.navLink}>Login</Link>
       </div>
     </nav>

@@ -1,3 +1,4 @@
+//backend.index.js
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -13,7 +14,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Routes
-const authRoutes = require('./routes/authRoutes'); 
+const authRoutes = require('./routes/authroutes'); 
 const userRoutes = require('./routes/userRoutes');
 const providerRoutes = require('./routes/providerRoutes');  
 const bookingRoutes = require('./routes/bookingRoutes');

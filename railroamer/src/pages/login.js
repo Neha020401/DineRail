@@ -14,10 +14,10 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const endpoint = role === 'USER' ? 'http://localhost:5000/api/auth/user/login' : '/api/auth/provider-login';
+      const endpoint = role === 'USER' ? 'http://localhost:5000/api/auth/user/login' : 'http://localhost:5000/api/auth/provider-login';
       const res = await axios.post(endpoint, { email, password });
       localStorage.setItem('token', res.data.token);
-      router.push(role === 'USER' ? '/profile' : '/provider/profile');
+      router.push(role === 'USER' ? '/profile-user' : '/provider/profile');
     } catch (err) {
       alert('Login failed');
     }

@@ -2,17 +2,19 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 export default function UserProfile() {
   const [profile, setProfile] = useState(null);
   const [editing, setEditing] = useState(false);
-  const [form, setForm] = useState({ name: '', phone: '', dob: '', aadhar: '' });
+  const [form, setForm] = useState({ name: '', phone: '', dob: '', aadhar: '',email:'' });
   const router = useRouter();
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get('/api/user/profile', {
+        const res = await axios.get('http://localhost:5000/api/user/profile', {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         setProfile(res.data);
@@ -20,7 +22,8 @@ export default function UserProfile() {
           name: res.data.name || '',
           phone: res.data.phone || '',
           dob: res.data.dob || '',
-          aadhar: res.data.aadhar || ''
+          aadhar: res.data.aadhar || '',
+          email:res.data.email || ''
         });
       } catch (err) {
         router.push('/login');
@@ -45,6 +48,8 @@ export default function UserProfile() {
   if (!profile) return <p className="text-center mt-10">Loading...</p>;
 
   return (
+    <>
+    <Navbar/>
     <div className="min-h-screen bg-gray-100 py-10">
       <div className="max-w-xl mx-auto bg-white p-6 rounded shadow">
         <h1 className="text-2xl font-bold mb-6 text-center">User Profile</h1>
@@ -67,5 +72,8 @@ export default function UserProfile() {
         )}
       </div>
     </div>
+    <Footer/>
+    </>
+    
   );
 }
