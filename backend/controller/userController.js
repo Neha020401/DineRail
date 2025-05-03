@@ -59,9 +59,17 @@ exports.bookTicket = async (req, res) => {
   }
 };
 
+// backend/controllers/userController.js
 exports.getOrders = async (req, res) => {
   try {
-    const [rows] = await pool.execute('SELECT * FROM food_orders WHERE user_id = ?', [req.user.id]);
+    const [rows] = await pool.execute(`
+      SELECT o.*, p.name AS provider_name, f.name AS food_item_name
+      FROM food_orders o
+      JOIN providers p ON o.provider_id = p.id
+      JOIN food_items f ON o.food_item_id = f.id
+      WHERE o.user_id = ?
+    `, [req.user.id]);
+
     res.json(rows);
   } catch (err) {
     res.status(500).json({ error: 'Failed to get orders' });

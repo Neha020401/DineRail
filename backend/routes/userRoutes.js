@@ -25,4 +25,11 @@ router.get('/orders', authenticate('USER'), async (req, res) => {
   res.json(orders);
 });
 
+router.get('/food-items', async (req, res) => {
+  const [orders] = await db.execute(
+    'SELECT * FROM food_items'
+  );
+  res.json(orders);
+});
+
 module.exports = router;
