@@ -9,7 +9,7 @@ export default function Services() {
       <Navbar />
       <div className={styles.service}>
         <div>
-          <Link href={"/services/book"} >Bookings</Link>
+          <Link href={"/services/booking"} >Bookings</Link>
         </div>
         <div>
         <Link href={"/services/mybookings"} >Your Bookings</Link>
@@ -19,7 +19,7 @@ export default function Services() {
           <Link href={"/services/order"}> Orders </Link>
         </div>
         <div>
-        <Link href={"/services/my-orders"}>Your Orders</Link>
+        <Link href={"/services/myorders"}>Your Orders</Link>
         </div>
         
       </div>

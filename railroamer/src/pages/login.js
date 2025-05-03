@@ -20,8 +20,8 @@ export default function Login() {
     try {
       const endpoint =
         role === "USER"
-          ? "http://localhost:5000/api/auth/user/login"
-          : "http://localhost:5000/api/auth/provider/login";
+          ? `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/auth/user/login`
+          : `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/auth/provider/login`;
       const res = await axios.post(endpoint, { email, password });
       localStorage.setItem("token", res.data.token);
       router.push(role === "USER" ? "/profile/user" : "/profile/provider");

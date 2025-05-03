@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const db = require("../config/db");
+const { v4: uuidv4 } = require('uuid');
 
 const userLogin = async (req, res) => {
   const { email, password } = req.body;
@@ -48,20 +49,22 @@ const userSignUp = async (req, res) => {
     const { name, email, password, phone_no, dob, aadhar_card } = req.body;
 
     // Check if user already exists
-    const [existing] = await db.execute("SELECT * FROM users WHERE email = ?", [
-      email,
-    ]);
+    const [existing] = await db.execute("SELECT * FROM users WHERE email = ?", [email]);
+
     if (existing.length > 0) {
       return res.status(400).json({ message: "User already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const [result] = await db.execute(
-      "INSERT INTO users (name, email, password, phone_no, dob, aadhar_card) VALUES (?, ?, ?, ?, ?, ?)",
-      [name, email, hashedPassword, phone_no, dob, aadhar_card]
+    const userId = uuidv4();
+
+    // Insert user into database
+    await db.execute(
+      "INSERT INTO users (id, name, email, password, phone_no, dob, aadhar_card) VALUES (?, ?, ?, ?, ?, ?, ?)",
+      [userId, name, email, hashedPassword, phone_no, dob, aadhar_card]
     );
 
-    const userId = result.insertId;
+    // Create JWT token
     const token = jwt.sign(
       { id: userId, role: "USER" },
       process.env.JWT_SECRET,
@@ -85,6 +88,7 @@ const providerSignUp = async (req, res) => {
     const [existing] = await db.execute("SELECT * FROM providers WHERE email = ?", [email]);
     if (existing.length > 0) return res.status(400).json({ message: "Provider already exists" });
 
+    const providerId = uuidv4();
     // Validate required fields based on provider_type
     if (provider_type === "Train_Service" && (!train_name || !train_number)) {
       return res.status(400).json({ message: "Train name and number required for Train_Service" });
@@ -96,14 +100,13 @@ const providerSignUp = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const [result] = await db.execute(
+    await db.execute(
       `INSERT INTO providers 
-        (name, email, password, provider_type, contact_number, gst_number, train_name, train_number, station_name)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      [name, email, hashedPassword, provider_type, contact_number, gst_number, train_name || null, train_number || null, station_name || null]
+        (id, name, email, password, provider_type, contact_number, gst_number, train_name, train_number, station_name)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)`,
+      [providerId, name, email, hashedPassword, provider_type, contact_number, gst_number, train_name || null, train_number || null, station_name || null]
     );
 
-    const providerId = result.insertId;
     const token = jwt.sign({ id: providerId, role: "PROVIDER" }, process.env.JWT_SECRET, { expiresIn: "1d" });
 
     res.status(201).json({

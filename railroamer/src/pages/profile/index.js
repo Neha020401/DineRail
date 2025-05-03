@@ -18,7 +18,7 @@ export default function ProfilePage() {
 
     const fetchProfile = async () => {
       try {
-        const resUser = await axios.get('http://localhost:5000/api/user/profile', {
+        const resUser = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/user/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setType('user');
@@ -32,7 +32,7 @@ export default function ProfilePage() {
         });
       } catch (userErr) {
         try {
-          const resProvider = await axios.get('http://localhost:5000/api/provider/profile', {
+          const resProvider = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/provider/profile`, {
             headers: { Authorization: `Bearer ${token}` },
           });
           setType('provider');
@@ -52,7 +52,7 @@ export default function ProfilePage() {
   const handleLogout = async () => {
     localStorage.removeItem('token');
     try {
-      await axios.post('http://localhost:5000/api/auth/logout');
+      await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/auth/logout`);
     } catch {}
     router.push('/login');
   };

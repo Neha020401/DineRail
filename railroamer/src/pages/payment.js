@@ -9,7 +9,7 @@ export default function Payment() {
 
   const handlePayment = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/payment/process-payment", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/payment/process-payment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,6 +1,7 @@
 // pages/profile-provider.js
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Navbar from "@/components/Navbar";
@@ -17,7 +18,7 @@ export default function ProviderProfile() {
 
     const fetchProfile = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/provider/profile", {
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/provider/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setProvider(res.data);
@@ -32,7 +33,7 @@ export default function ProviderProfile() {
 
   const handleLogout = async () => {
     localStorage.removeItem("token");
-    await axios.post("http://localhost:5000/api/auth/logout");
+    await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/auth/logout`);
     router.push("/login");
   };
 
@@ -55,7 +56,10 @@ export default function ProviderProfile() {
       ) : (
         <p><strong>Station Name:</strong> {provider.station_name}</p>
       )}
-      <div><Link href={'/upload'}>Upload Food</Link></div>
+      <div>
+      <button className="mt-6 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
+      ><Link href={'/upload'}>Upload Food</Link></button>
+      </div>
       <button
         onClick={handleLogout}
         className="mt-6 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"

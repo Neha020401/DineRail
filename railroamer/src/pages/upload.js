@@ -14,7 +14,7 @@ export default function UploadFood() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/provider/profile', {
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/provider/profile`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         setRole(res.data.role || 'PROVIDER');
@@ -48,7 +48,7 @@ export default function UploadFood() {
     formData.append('image', image);
 
     try {
-      const res = await axios.post('http://localhost:5000/api/provider/food', formData, {
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/provider/food`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${localStorage.getItem('token')}`,

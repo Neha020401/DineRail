@@ -58,8 +58,8 @@ export default function Signup() {
     try {
       const endpoint =
         role === "USER"
-          ? "http://localhost:5000/api/auth/user/signup"
-          : "http://localhost:5000/api/auth/provider/signup";
+          ? `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/auth/user/signup`
+          : `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/auth/provider/signup`;
 
       const payload =
         role === "USER"

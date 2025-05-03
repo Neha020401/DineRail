@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
 const authenticate = require('../middleware/auth');
+const { bookTicket } = require('../controller/userController');
 
 // Get available seats for a train on a specific date
 router.get('/available-seats', async (req, res) => {
@@ -28,25 +29,6 @@ router.get('/available-seats', async (req, res) => {
 });
 
 // Book a ticket
-router.post('/book', authenticate('USER'), async (req, res) => {
-  const { train_no, from_station, to_station, fare, travel_date, seat_number } = req.body;
-
-  if (!train_no || !from_station || !to_station || !fare || !travel_date || !seat_number) {
-    return res.status(400).json({ message: 'Missing required fields' });
-  }
-
-  const [alreadyBooked] = await db.execute(
-    'SELECT * FROM bookings WHERE train_no = ? AND travel_date = ? AND seat_number = ?',
-    [train_no, travel_date, seat_number]
-  );
-  if (alreadyBooked.length > 0) return res.status(409).json({ message: 'Seat already booked' });
-
-  await db.execute(
-    'INSERT INTO bookings (user_id, train_no, from_station, to_station, fare, travel_date, seat_number) VALUES (?, ?, ?, ?, ?, ?, ?)',
-    [req.user.id, train_no, from_station, to_station, fare, travel_date, seat_number]
-  );
-
-  res.json({ message: 'Booking successful' });
-});
+router.post('/book', authenticate('USER'), bookTicket);
 
 module.exports = router;
