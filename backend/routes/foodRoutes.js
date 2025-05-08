@@ -2,6 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../config/db");
+const { v4: uuidv4 } = require("uuid");
 
 router.get("/", async (req, res) => {
   try {
@@ -57,10 +58,58 @@ router.get("/:id", async (req, res) => {
     }
 
     res.json(items[0]);
-
   } catch (error) {
     console.error("Error fetching food items:", error);
     res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+//FoodOrder api
+router.post("food//place", async (req, res) => {
+  const {
+    food_item_id,
+    provider_id,
+    quantity,
+    train_name,
+    train_no,
+    seat_number,
+  } = req.body;
+  const userId = req.user.id; // Assume you have authentication middleware that adds `req.user`
+
+  try {
+    const orderId = uuidv4();
+
+    const [[foodItem]] = await db.execute(
+      "SELECT price FROM food_items WHERE id = ?",
+      [food_item_id]
+    );
+
+    if (!foodItem)
+      return res.status(404).json({ message: "Food item not found" });
+
+    const totalPrice = foodItem.price * quantity;
+
+    await db.execute(
+      `
+      INSERT INTO food_orders (id, user_id, food_item_id, provider_id, quantity, total_price, train_name, train_number, seat_number)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        orderId,
+        userId,
+        food_item_id,
+        provider_id,
+        quantity,
+        totalPrice,
+        train_name,
+        train_no,
+        seat_number,
+      ]
+    );
+
+    res.json({ order_id: orderId, total_price: totalPrice });
+  } catch (err) {
+    console.error("Error placing order:", err);
+    res.status(500).json({ message: "Failed to place order" });
   }
 });
 

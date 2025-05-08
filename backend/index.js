@@ -29,6 +29,7 @@ const bookingRoutes = require("./routes/bookingRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const paymentRoutes = require("./routes/paymentRoutes");
 const foodRoutes = require("./routes/foodRoutes")
+const reviewRoutes =require("./routes/reviewRoutes")
 
 // Mount Routes
 app.use("/api/auth", authRoutes);
@@ -38,6 +39,8 @@ app.use("/api/bookings", bookingRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/food-items", foodRoutes);
+app.use("/api/food-review",reviewRoutes)
+
 
 
 // Home route

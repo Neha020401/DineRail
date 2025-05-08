@@ -17,9 +17,9 @@ export default function Services() {
         <div>
           <Link href={"/services/food"}> Food </Link>
         </div>
-        <div>
+        {/* <div>
           <Link href={"/services/order"}> Orders </Link>
-        </div>
+        </div> */}
         <div>
         <Link href={"/services/myorders"}>Your Orders</Link>
         </div>

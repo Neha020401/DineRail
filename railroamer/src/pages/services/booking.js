@@ -1,159 +1,166 @@
-import { useState } from 'react';
-import api from '../../utils/api';
-import Navbar from '../../components/Navbar';
-import styles from '../../../public/StyleSheet/Book.module.css';
-
-// Hardcoded Indian station list
-const stations = [
-  'New Delhi', 'Mumbai Central', 'Chennai Central', 'Howrah Junction',
-  'Bangalore City', 'Secunderabad', 'Ahmedabad Junction', 'Pune Junction',
-  'Patna Junction', 'Lucknow NR', 'Kanpur Central', 'Varanasi Junction',
-  'Ernakulam Junction', 'Nagpur Junction', 'Bhopal Junction'
-];
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export default function Booking() {
-  const [form, setForm] = useState({
-    train_from: '',
-    train_to: '',
-    date: '',
-    seat_type: '',
-    fare: '',
-    train_id: ''
-  });
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
+  const [trains, setTrains] = useState([]);
+  const [selectedTrain, setSelectedTrain] = useState(null);
+  const [availableSeats, setAvailableSeats] = useState(0);
+  const [numSeats, setNumSeats] = useState(1);
+  const [passengers, setPassengers] = useState([]);
+  const [ticketAmount, setTicketAmount] = useState(0);
 
-  const [passengers, setPassengers] = useState([
-    { name: '', age: '', gender: '', address: '' }
-  ]);
+  const handleSearchTrains = async () => {
+    const options = {
+      method: "GET",
+      url: "https://example-rapidapi-train-endpoint.com/search",
+      params: { from, to },
+      headers: {
+        "X-RapidAPI-Key": process.env.NEXT_PUBLIC_RAPIDAPI_KEY,
+        "X-RapidAPI-Host": "example-rapidapi-train-endpoint.com",
+      },
+    };
+    const res = await axios.request(options);
+    setTrains(res.data.trains || []);
+  };
 
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
+  const handleSelectTrain = async (train) => {
+    setSelectedTrain(train);
+    // Mock seat data here
+    setAvailableSeats(train.available_seats || 50);
+    setTicketAmount(train.ticket_price || 100);
+  };
 
-  const handlePassengerChange = (index, e) => {
+  const handlePassengerChange = (index, field, value) => {
     const updated = [...passengers];
-    updated[index][e.target.name] = e.target.value;
+    updated[index] = { ...updated[index], [field]: value };
     setPassengers(updated);
   };
 
-  const addPassenger = () => {
-    setPassengers([...passengers, { name: '', age: '', gender: '', address: '' }]);
-  };
-
-  const removePassenger = (index) => {
-    const updated = passengers.filter((_, i) => i !== index);
-    setPassengers(updated);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setMessage('');
-
-    if (form.train_from === form.train_to) {
-      setMessage("❌ 'From' and 'To' stations cannot be the same.");
-      return;
-    }
-
-    const hasInvalidAge = passengers.some(p => parseInt(p.age) <= 5);
-    if (hasInvalidAge) {
-      setMessage("❌ Passenger age must be above 5.");
-      return;
-    }
-
-    setLoading(true);
-    try {
-      await api.post(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/bookings/book`, { ...form, passengers });
-      setMessage('✅ Booking successful!');
-      setForm({
-        train_from: '',
-        train_to: '',
-        date: '',
-        seat_type: '',
-        fare: '',
-        train_id: ''
-      });
-      setPassengers([{ name: '', age: '', gender: '', address: '' }]);
-    } catch (err) {
-      setMessage('❌ Failed to book. Try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
+  useEffect(() => {
+    setPassengers(Array(numSeats).fill({ name: "", age: "", aadhar: "" }));
+  }, [numSeats]);
 
   return (
     <>
       <Navbar />
-      <div className={styles.container}>
-        <h2 className={styles.title}>Book a Train</h2>
-        <form onSubmit={handleSubmit} className={styles.form}>
-          {/* From Station */}
-          <select value={form.train_from}
-            onChange={(e) => setForm({ ...form, train_from: e.target.value })}
-            className={styles.input} required>
-            <option value="">Select From Station</option>
-            {stations.map((station) => (
-              <option key={station} value={station} disabled={station === form.train_to}>
-                {station}
-              </option>
-            ))}
-          </select>
+      <div className="p-6 max-w-4xl mx-auto">
+        <h1 className="text-2xl font-bold mb-4">Book Your Train</h1>
 
-          {/* To Station */}
-          <select value={form.train_to}
-            onChange={(e) => setForm({ ...form, train_to: e.target.value })}
-            className={styles.input} required>
-            <option value="">Select To Station</option>
-            {stations.map((station) => (
-              <option key={station} value={station} disabled={station === form.train_from}>
-                {station}
-              </option>
-            ))}
-          </select>
+        {/* Source and Destination */}
+        <div className="grid grid-cols-2 gap-4 mb-4">
+          <input
+            type="text"
+            className="border p-2 rounded"
+            placeholder="From (e.g., Delhi)"
+            value={from}
+            onChange={(e) => setFrom(e.target.value)}
+          />
+          <input
+            type="text"
+            className="border p-2 rounded"
+            placeholder="To (e.g., Mumbai)"
+            value={to}
+            onChange={(e) => setTo(e.target.value)}
+          />
+        </div>
+        <button
+          onClick={handleSearchTrains}
+          className="bg-blue-500 text-white px-4 py-2 rounded mb-6"
+        >
+          Search Trains
+        </button>
 
-          <input type="date" value={form.date}
-            onChange={(e) => setForm({ ...form, date: e.target.value })} className={styles.input} required />
-          <input type="text" placeholder="Seat Type (e.g., Sleeper)" value={form.seat_type}
-            onChange={(e) => setForm({ ...form, seat_type: e.target.value })} className={styles.input} required />
-          <input type="number" placeholder="Fare" value={form.fare}
-            onChange={(e) => setForm({ ...form, fare: e.target.value })} className={styles.input} required />
-          <input type="text" placeholder="Train ID / Number" value={form.train_id}
-            onChange={(e) => setForm({ ...form, train_id: e.target.value })} className={styles.input} required />
+        {/* Train Dropdown */}
+        {trains.length > 0 && (
+          <div className="mb-6">
+            <label className="block mb-2 font-semibold">Select Train:</label>
+            <select
+              className="border p-2 w-full rounded"
+              onChange={(e) => handleSelectTrain(JSON.parse(e.target.value))}
+            >
+              <option value="">-- Choose Train --</option>
+              {trains.map((train, i) => (
+                <option key={i} value={JSON.stringify(train)}>
+                  {train.name} ({train.number})
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
 
-          <h3>Passenger Details</h3>
-          {passengers.map((p, idx) => (
-            <div key={idx} className={styles.passengerBlock}>
-              <input type="text" name="name" placeholder="Name" value={p.name}
-                onChange={(e) => handlePassengerChange(idx, e)} className={styles.input} required />
+        {/* Show Seat Selection and Passenger Details */}
+        {selectedTrain && (
+          <>
+            <div className="mb-4">
+              <p>
+                <strong>Available Seats:</strong> {availableSeats}
+              </p>
+              <p>
+                <strong>Ticket Price:</strong> ₹{ticketAmount} per seat
+              </p>
+            </div>
+
+            <div className="mb-4">
+              <label className="block mb-2 font-semibold">
+                Number of Seats:
+              </label>
               <input
                 type="number"
-                name="age"
-                placeholder="Age"
-                value={p.age}
-                onChange={(e) => handlePassengerChange(idx, e)}
-                className={styles.input}
-                required
-                min="6"
+                min="1"
+                max={availableSeats}
+                value={numSeats}
+                onChange={(e) => setNumSeats(Number(e.target.value))}
+                className="border p-2 w-full rounded"
               />
-              <select name="gender" value={p.gender} onChange={(e) => handlePassengerChange(idx, e)} className={styles.input} required>
-                <option value="">Select Gender</option>
-                <option>Male</option>
-                <option>Female</option>
-                <option>Other</option>
-              </select>
-              <input type="text" name="address" placeholder="Address" value={p.address}
-                onChange={(e) => handlePassengerChange(idx, e)} className={styles.input} required />
-              {passengers.length > 1 && (
-                <button type="button" onClick={() => removePassenger(idx)} className={styles.removeBtn}>Remove</button>
-              )}
             </div>
-          ))}
 
-          <button type="button" onClick={addPassenger} className={styles.addBtn}>Add Passenger</button>
+            <h2 className="text-lg font-semibold mb-2">Passenger Details</h2>
+            {passengers.map((p, idx) => (
+              <div key={idx} className="border p-4 rounded mb-4">
+                <p className="font-medium">Passenger {idx + 1}</p>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  className="border p-2 rounded w-full mb-2"
+                  onChange={(e) =>
+                    handlePassengerChange(idx, "name", e.target.value)
+                  }
+                />
+                <input
+                  type="number"
+                  placeholder="Age"
+                  className="border p-2 rounded w-full mb-2"
+                  onChange={(e) =>
+                    handlePassengerChange(idx, "age", e.target.value)
+                  }
+                />
+                <input
+                  type="text"
+                  placeholder="Aadhar Number"
+                  className="border p-2 rounded w-full"
+                  onChange={(e) =>
+                    handlePassengerChange(idx, "aadhar", e.target.value)
+                  }
+                />
+              </div>
+            ))}
 
-          <button type="submit" className={styles.button} disabled={loading}>
-            {loading ? 'Booking...' : 'Book Now'}
-          </button>
-        </form>
-        {message && <p className={styles.message}>{message}</p>}
+            <div className="mt-6 font-bold text-lg">
+              Total Amount: ₹{ticketAmount * numSeats}
+            </div>
+
+            {/* Submit Button */}
+            <button className="bg-green-600 text-white px-6 py-2 mt-4 rounded">
+              Proceed to Payment
+            </button>
+          </>
+        )}
       </div>
+      <Footer />
     </>
   );
 }
