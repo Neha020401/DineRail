@@ -1,8 +1,8 @@
-// pages/services/food/[id].js
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import styles from "../../../../public/StyleSheet/FoodDetails.module.css"; 
 
 export default function FoodDetailPage() {
   const router = useRouter();
@@ -63,7 +63,6 @@ export default function FoodDetailPage() {
 
     const data = await res.json();
     if (data.order_id) {
-      // simulate payment call
       await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}payments/food/pay`,
         {
@@ -89,80 +88,76 @@ export default function FoodDetailPage() {
   return (
     <>
       <Navbar />
-      <div className="p-6">
+      <div className={styles.container}>
         <img
           src={`${process.env.NEXT_PUBLIC_IMAGE_URL + food.image_url}`}
           alt={food.food_name}
-          className="w-full h-60 object-cover rounded"
+          className={styles.image}
         />
-        <h1 className="text-3xl font-bold mt-4">{food.food_name}</h1>
-        <p className="text-gray-600 mt-2">{food.description}</p>
-        <p className="text-xl font-semibold mt-2">₹{food.price}</p>
+        <h1 className={styles.title}>{food.food_name}</h1>
+        <p className={styles.description}>{food.description}</p>
+        <p className={styles.price}>₹{food.price}</p>
 
-        <button
-          onClick={handleOrder}
-          className="mt-3 px-6 py-2 bg-green-600 text-white rounded"
-        >
+        <button onClick={handleOrder} className={styles.orderButton}>
           Place & Pay
         </button>
-
-        <div className="mt-6">
-          <h2 className="text-lg font-semibold">Leave a Review</h2>
-          <input
-            type="number"
-            min="1"
-            max="5"
-            value={rating}
-            onChange={(e) => setRating(e.target.value)}
-            className="border p-2 w-20"
-          />
-          <textarea
-            className="border w-full p-2 mt-2"
-            placeholder="Write your comment"
-            value={review}
-            onChange={(e) => setReview(e.target.value)}
-          />
-          <button
-            onClick={handleReview}
-            className="mt-2 px-4 py-2 bg-blue-600 text-white rounded"
-          >
-            Submit Review
-          </button>
-        </div>
-
-        <div className="mt-8">
-          <h2 className="text-lg font-semibold">Order Now</h2>
+ <div className={styles.orderForm}>
+          <h2 className={styles.sectionTitle}>Order Now</h2>
           <input
             type="number"
             placeholder="Quantity"
             value={order.quantity}
             onChange={(e) => setOrder({ ...order, quantity: e.target.value })}
-            className="border p-2 block mt-2"
+            className={styles.input}
           />
           <input
             type="text"
             placeholder="Train Name"
             value={order.train_name}
             onChange={(e) => setOrder({ ...order, train_name: e.target.value })}
-            className="border p-2 block mt-2"
+            className={styles.input}
           />
           <input
             type="text"
             placeholder="Train Number"
             value={order.train_no}
             onChange={(e) => setOrder({ ...order, train_no: e.target.value })}
-            className="border p-2 block mt-2"
+            className={styles.input}
           />
           <input
             type="text"
             placeholder="Seat Number"
             value={order.seat_number}
-            onChange={(e) =>
-              setOrder({ ...order, seat_number: e.target.value })
-            }
-            className="border p-2 block mt-2"
+            onChange={(e) => setOrder({ ...order, seat_number: e.target.value })}
+            className={styles.input}
           />
         </div>
+        <div className={styles.reviewSection}>
+        <h2 className={styles.sectionTitle}>Leave a Review</h2>
+<div className={styles.stars}>
+  {[1, 2, 3, 4, 5].map((star) => (
+    <span
+      key={star}
+      className={star <= rating ? styles.starFilled : styles.star}
+      onClick={() => setRating(star)}
+    >
+      ★
+    </span>
+  ))}
+</div>
+
+          <textarea
+            className={styles.textarea}
+            placeholder="Write your comment"
+            value={review}
+            onChange={(e) => setReview(e.target.value)}
+          />
+          <button onClick={handleReview} className={styles.reviewButton}>
+            Submit Review
+          </button>
+        </div>
+
+       
       </div>
       <Footer />
     </>
