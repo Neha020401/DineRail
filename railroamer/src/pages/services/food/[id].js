@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import styles from "../../../../public/StyleSheet/FoodDetails.module.css"; 
+import styles from "../../../../public/StyleSheet/FoodDetails.module.css";
 
 export default function FoodDetailPage() {
   const router = useRouter();
@@ -43,7 +43,7 @@ export default function FoodDetailPage() {
 
   const handleOrder = async () => {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/food-items/place`,
+      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/orders/place`,
       {
         method: "POST",
         headers: {
@@ -101,7 +101,7 @@ export default function FoodDetailPage() {
         <button onClick={handleOrder} className={styles.orderButton}>
           Place & Pay
         </button>
- <div className={styles.orderForm}>
+        <div className={styles.orderForm}>
           <h2 className={styles.sectionTitle}>Order Now</h2>
           <input
             type="number"
@@ -128,23 +128,25 @@ export default function FoodDetailPage() {
             type="text"
             placeholder="Seat Number"
             value={order.seat_number}
-            onChange={(e) => setOrder({ ...order, seat_number: e.target.value })}
+            onChange={(e) =>
+              setOrder({ ...order, seat_number: e.target.value })
+            }
             className={styles.input}
           />
         </div>
         <div className={styles.reviewSection}>
-        <h2 className={styles.sectionTitle}>Leave a Review</h2>
-<div className={styles.stars}>
-  {[1, 2, 3, 4, 5].map((star) => (
-    <span
-      key={star}
-      className={star <= rating ? styles.starFilled : styles.star}
-      onClick={() => setRating(star)}
-    >
-      ★
-    </span>
-  ))}
-</div>
+          <h2 className={styles.sectionTitle}>Leave a Review</h2>
+          <div className={styles.stars}>
+            {[1, 2, 3, 4, 5].map((star) => (
+              <span
+                key={star}
+                className={star <= rating ? styles.starFilled : styles.star}
+                onClick={() => setRating(star)}
+              >
+                ★
+              </span>
+            ))}
+          </div>
 
           <textarea
             className={styles.textarea}
@@ -156,8 +158,6 @@ export default function FoodDetailPage() {
             Submit Review
           </button>
         </div>
-
-       
       </div>
       <Footer />
     </>

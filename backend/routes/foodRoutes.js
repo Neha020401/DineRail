@@ -65,7 +65,7 @@ router.get("/:id", async (req, res) => {
 });
 
 //FoodOrder api
-router.post("food//place", async (req, res) => {
+router.post("food-items/place", async (req, res) => {
   const {
     food_item_id,
     provider_id,
