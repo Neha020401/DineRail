@@ -20,9 +20,9 @@ export default function UserProfile() {
         setProfile(res.data);
         setForm({
           name: res.data.name || '',
-          phone: res.data.phone || '',
+          phone: res.data.phone_no || '',
           dob: res.data.dob || '',
-          aadhar: res.data.aadhar || '',
+          aadhar: res.data.aadhar_card || '',
           email:res.data.email || ''
         });
       } catch (err) {
@@ -42,7 +42,7 @@ export default function UserProfile() {
   
   const handleSave = async () => {
     try {
-      await axios.put('/api/user/profile', form, {
+      await axios.put(`/api/user/profile`, form, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       setEditing(false);
@@ -62,17 +62,17 @@ export default function UserProfile() {
         {editing ? (
           <div className="space-y-4">
             <input name="name" type="text" value={form.name} onChange={handleChange} placeholder="Name" className="w-full border px-3 py-2" />
-            <input name="phone" type="text" value={form.phone} onChange={handleChange} placeholder="Phone" className="w-full border px-3 py-2" />
+            <input name="phone" type="text" value={form.phone_no} onChange={handleChange} placeholder="Phone" className="w-full border px-3 py-2" />
             <input name="dob" type="date" value={form.dob} onChange={handleChange} className="w-full border px-3 py-2" />
-            <input name="aadhar" type="text" value={form.aadhar} onChange={handleChange} placeholder="Aadhar Card" className="w-full border px-3 py-2" />
+            <input name="aadhar" type="text" value={form.aadhar_card} onChange={handleChange} placeholder="Aadhar Card" className="w-full border px-3 py-2" />
             <button onClick={handleSave} className="bg-blue-600 text-white px-4 py-2 rounded w-full">Save</button>
           </div>
         ) : (
           <div className="space-y-2 text-lg">
             <p><strong>Name:</strong> {profile.name}</p>
-            <p><strong>Phone:</strong> {profile.phone}</p>
+            <p><strong>Phone:</strong> {profile.phone_no}</p>
             <p><strong>DOB:</strong> {profile.dob}</p>
-            <p><strong>Aadhar:</strong> {profile.aadhar}</p>
+            <p><strong>Aadhar:</strong> {profile.aadhar_card}</p>
             <button onClick={() => setEditing(true)} className="mt-4 bg-yellow-500 text-white px-4 py-2 rounded w-full">Edit Profile</button>
           </div>
         )}
