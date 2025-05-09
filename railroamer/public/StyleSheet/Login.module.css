@@ -1,73 +1,168 @@
+.wrapper {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #f8fafc, #e0f2fe, #e0e7ff);
+  display: flex;
+  flex-direction: column;
+}
+
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 64px); /* Adjust for Navbar height */
-    background-color: #f7fafc; /* Light gray background (bg-gray-100) */
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.card {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 450px;
+  width: 100%;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #1e293b;
+}
+
+.subtitle {
+  text-align: center;
+  color: #64748b;
+  margin-bottom: 1.5rem;
+}
+
+.roleSwitch {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.roleOption {
+  flex: 1;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: #f1f5f9;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #475569;
+  border: 2px solid transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.roleOption:hover {
+  background: #e2e8f0;
+}
+
+.activeRole {
+  background: #e0f2fe;
+  border-color: #3b82f6;
+  color: #1d4ed8;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.inputGroup {
+  position: relative;
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.75rem;
+  background: #f8fafc;
+  font-size: 1rem;
+  color: #1e293b;
+}
+
+.inputGroup input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background: #fff;
+}
+
+.icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+}
+
+.forgot {
+  text-align: right;
+}
+
+.forgot a {
+  font-size: 0.875rem;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.forgot a:hover {
+  text-decoration: underline;
+}
+
+.loginBtn {
+  padding: 0.75rem;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.loginBtn:hover {
+  background: #1d4ed8;
+}
+
+.loginBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+  height: 20px;
+  width: 20px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
-  
-  .formWrapper {
-    max-width: 28rem; /* max-w-md */
-    width: 100%;
-    margin-top: 2.5rem; /* mt-10 */
-    background-color: #ffffff; /* bg-white */
-    padding: 1.5rem; /* p-6 */
-    border-radius: 0.375rem; /* rounded */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06); /* shadow */
+
+  100% {
+    transform: rotate(360deg);
   }
-  
-  .title {
-    font-size: 1.25rem; /* text-xl */
-    font-weight: bold; /* font-bold */
-    margin-bottom: 1rem; /* mb-4 */
-    color: #1f2937; /* text-gray-800 */
-  }
-  
-  .input {
-    width: 100%; /* w-full */
-    margin-bottom: 0.75rem; /* mb-3 */
-    padding: 0.5rem; /* p-2 */
-    border: 1px solid #d1d5db; /* border (border-gray-300) */
-    border-radius: 0.375rem; /* rounded */
-    font-size: 1rem;
-    color: #374151; /* text-gray-700 */
-  }
-  
-  .input:focus {
-    outline: none;
-    border-color: #2563eb; /* focus:border-blue-600 */
-    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2); /* focus:ring */
-  }
-  
-  .button {
-    width: 100%; /* w-full */
-    background-color: #2563eb; /* bg-blue-600 */
-    color: #ffffff; /* text-white */
-    padding: 0.5rem; /* p-2 */
-    border-radius: 0.375rem; /* rounded */
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    border: none;
-  }
-  
-  .button:hover {
-    background-color: #1d4ed8; /* hover:bg-blue-700 */
-  }
-  
-  .toggleText {
-    margin-top: 1rem; /* mt-4 */
-    text-align: center; /* text-center */
-    font-size: 0.875rem; /* text-sm */
-    color: #6b7280; /* text-gray-600 */
-  }
-  
-  .toggleLink {
-    color: #2563eb; /* text-blue-600 */
-    text-decoration: underline;
-    cursor: pointer;
-  }
-  
-  .toggleLink:hover {
-    color: #1d4ed8; /* hover:text-blue-700 */
-  }
+}
+
+.signupLink {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #64748b;
+}
+
+.signupLink a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.signupLink a:hover {
+  text-decoration: underline;
+}

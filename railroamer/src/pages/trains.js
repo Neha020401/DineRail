@@ -1,8 +1,9 @@
-// pages/trains.js
+"use client";
+
 import { useState } from "react";
 import { useRouter } from "next/router";
-import Navbar from "../components/Navbar";
 import axios from "axios";
+import styles from '../../public/StyleSheet/Trains.module.css'; 
 
 export default function Trains() {
   const [trains, setTrains] = useState([]);
@@ -56,7 +57,7 @@ export default function Trains() {
             dateOfJourney,
           },
           headers: {
-            "x-rapidapi-key": `${process.env.NEXT_PUBLIC_RAPIDAPI_KEY}`,
+            "x-rapidapi-key": process.env.NEXT_PUBLIC_RAPIDAPI_KEY,
             "x-rapidapi-host": "irctc1.p.rapidapi.com",
           },
         }
@@ -85,70 +86,78 @@ export default function Trains() {
 
   return (
     <>
-  
-      <div className="max-w-6xl mx-auto mt-10 px-4">
-        <div className="bg-white shadow-xl rounded-2xl p-6">
-          <h2 className="text-3xl font-bold text-blue-700 mb-6">
-            Search Trains Between Stations
-          </h2>
+   
+      <div className={styles.container}>
+        <div className={styles.formContainer}>
+          <h1 className={styles.title}>🚆 Find Trains Between Stations</h1>
 
           <form
             onSubmit={handleSubmit}
-            className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8"
+            className={styles.form}
           >
-            <select
-              value={fromStationCode}
-              onChange={(e) => setFromStationCode(e.target.value)}
-              className="border border-blue-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="">Select From Station</option>
-              {stationList.map((station) => (
-                <option key={station.code} value={station.code}>
-                  {station.name} ({station.code})
-                </option>
-              ))}
-            </select>
+            <div>
+              <label className={styles.label}>From Station</label>
+              <select
+                value={fromStationCode}
+                onChange={(e) => setFromStationCode(e.target.value)}
+                className={styles.select}
+              >
+                <option value="">Select From Station</option>
+                {stationList.map((station) => (
+                  <option key={station.code} value={station.code}>
+                    {station.name} ({station.code})
+                  </option>
+                ))}
+              </select>
+            </div>
 
-            <select
-              value={toStationCode}
-              onChange={(e) => setToStationCode(e.target.value)}
-              className="border border-blue-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="">Select To Station</option>
-              {stationList.map((station) => (
-                <option key={station.code} value={station.code}>
-                  {station.name} ({station.code})
-                </option>
-              ))}
-            </select>
+            <div>
+              <label className={styles.label}>To Station</label>
+              <select
+                value={toStationCode}
+                onChange={(e) => setToStationCode(e.target.value)}
+                className={styles.select}
+              >
+                <option value="">Select To Station</option>
+                {stationList.map((station) => (
+                  <option key={station.code} value={station.code}>
+                    {station.name} ({station.code})
+                  </option>
+                ))}
+              </select>
+            </div>
 
-            <input
-              type="date"
-              value={dateOfJourney}
-              onChange={(e) => setDateOfJourney(e.target.value)}
-              className="border border-blue-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+            <div>
+              <label className={styles.label}>Journey Date</label>
+              <input
+                type="date"
+                value={dateOfJourney}
+                onChange={(e) => setDateOfJourney(e.target.value)}
+                className={styles.input}
+              />
+            </div>
 
-            <button
-              type="submit"
-              className="md:col-span-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition duration-200"
-            >
-              {loading ? "Searching..." : "Find Trains"}
-            </button>
+            <div className={styles.submitContainer}>
+              <button
+                type="submit"
+                className={styles.submitButton}
+              >
+                {loading ? "Searching..." : "Find Trains"}
+              </button>
+            </div>
           </form>
 
-          {/* Train Table */}
           {trains.length > 0 ? (
-            <div className="overflow-x-auto">
-              <table className="min-w-full bg-white border border-gray-200 text-sm">
+            <div className={styles.tableContainer}>
+              <table className={styles.table}>
                 <thead>
-                  <tr className="bg-blue-100 text-blue-800 text-left">
-                    <th className="py-3 px-4 border">Train</th>
-                    <th className="py-3 px-4 border">From → To</th>
-                    <th className="py-3 px-4 border">Departure</th>
-                    <th className="py-3 px-4 border">Arrival</th>
-                    <th className="py-3 px-4 border">Duration</th>
-                    <th className="py-3 px-4 border">Distance</th>
+                  <tr>
+                    <th className={styles.tableHeader}>Train</th>
+                    <th className={styles.tableHeader}>From → To</th>
+                    <th className={styles.tableHeader}>Departure</th>
+                    <th className={styles.tableHeader}>Arrival</th>
+                    <th className={styles.tableHeader}>Duration</th>
+                    <th className={styles.tableHeader}>Distance</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -158,18 +167,18 @@ export default function Trains() {
                       onClick={() =>
                         router.push(`/train-status?train=${train.train_number}`)
                       }
-                      className="hover:bg-blue-50 cursor-pointer transition"
+                      className={styles.tableRow}
                     >
-                      <td className="py-2 px-4 border font-medium text-blue-600">
+                      <td className={styles.tableData}>
                         {train.train_name} ({train.train_number})
                       </td>
-                      <td className="py-2 px-4 border">
+                      <td className={styles.tableData}>
                         {train.from_station_name} → {train.to_station_name}
                       </td>
-                      <td className="py-2 px-4 border">{train.from_std}</td>
-                      <td className="py-2 px-4 border">{train.to_sta}</td>
-                      <td className="py-2 px-4 border">{train.duration}</td>
-                      <td className="py-2 px-4 border">{train.distance} km</td>
+                      <td className={styles.tableData}>{train.from_std}</td>
+                      <td className={styles.tableData}>{train.to_sta}</td>
+                      <td className={styles.tableData}>{train.duration}</td>
+                      <td className={styles.tableData}>{train.distance} km</td>
                     </tr>
                   ))}
                 </tbody>
@@ -177,8 +186,8 @@ export default function Trains() {
             </div>
           ) : (
             !loading && (
-              <p className="text-gray-500 text-center mt-6">
-                No trains to display. Please search above.
+              <p className={styles.noTrainsMessage}>
+                No trains found. Please search with valid inputs.
               </p>
             )
           )}

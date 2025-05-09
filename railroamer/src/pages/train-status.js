@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Navbar from '../components/Navbar';
+import styles from '../../public/StyleSheet/train-statue.module.css'; // Import custom CSS file
 
 export default function TrainStatus() {
   const searchParams = useSearchParams();
@@ -59,27 +60,25 @@ export default function TrainStatus() {
   return (
     <>
       <Navbar />
-      <div className="max-w-3xl mx-auto mt-10 px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-xl shadow p-6">
-          <h2 className="text-2xl font-bold text-blue-700 mb-4">
-            Live Train Status
-          </h2>
+      <div className={styles.container}>
+        <div className={styles.card}>
+          <h2 className={styles.heading}>Live Train Status</h2>
 
-          <div className="flex flex-col gap-3">
+          <div className={styles.inputContainer}>
             <input
               type="text"
               placeholder="Enter Train Name or Number"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={styles.input}
               value={trainInput}
               onChange={(e) => setTrainInput(e.target.value)}
             />
 
             {trainSuggestions.length > 0 && (
-              <ul className="border rounded-md bg-white shadow max-h-60 overflow-y-auto">
+              <ul className={styles.suggestions}>
                 {trainSuggestions.map((item) => (
                   <li
                     key={item.train_number}
-                    className="p-2 hover:bg-gray-100 cursor-pointer"
+                    className={styles.suggestionItem}
                     onClick={() => {
                       setTrainInput(item.train_number);
                       setTrainSuggestions([]);
@@ -91,54 +90,47 @@ export default function TrainStatus() {
               </ul>
             )}
 
-            <button
-              onClick={handleSearch}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition"
-            >
+            <button onClick={handleSearch} className={styles.button}>
               Check Status
             </button>
 
-            {error && (
-              <div className="text-red-600 font-medium mt-2">{error}</div>
-            )}
+            {error && <div className={styles.error}>{error}</div>}
           </div>
 
           {trainStatus && (
-            <div className="mt-6 bg-gray-50 border border-gray-200 rounded-lg p-5">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                Train Details
-              </h3>
-              <div className="grid sm:grid-cols-2 gap-4 text-sm">
+            <div className={styles.trainDetails}>
+              <h3 className={styles.subHeading}>Train Details</h3>
+              <div className={styles.detailsGrid}>
                 <p>
-                  <span className="font-semibold">Train:</span>{' '}
+                  <span className={styles.bold}>Train:</span>{' '}
                   {trainStatus.trainName} ({trainStatus.trainNumber})
                 </p>
                 <p>
-                  <span className="font-semibold">Current Station:</span>{' '}
+                  <span className={styles.bold}>Current Station:</span>{' '}
                   {trainStatus.currentStation}
                 </p>
                 <p>
-                  <span className="font-semibold">ETA:</span>{' '}
+                  <span className={styles.bold}>ETA:</span>{' '}
                   {trainStatus.eta}
                 </p>
                 <p>
-                  <span className="font-semibold">ETD:</span>{' '}
+                  <span className={styles.bold}>ETD:</span>{' '}
                   {trainStatus.etd}
                 </p>
                 <p>
-                  <span className="font-semibold">Platform:</span>{' '}
+                  <span className={styles.bold}>Platform:</span>{' '}
                   {trainStatus.platform}
                 </p>
                 <p>
-                  <span className="font-semibold">Delay:</span>{' '}
+                  <span className={styles.bold}>Delay:</span>{' '}
                   {trainStatus.delay} minutes
                 </p>
                 <p>
-                  <span className="font-semibold">Status as of:</span>{' '}
+                  <span className={styles.bold}>Status as of:</span>{' '}
                   {trainStatus.statusAsOf}
                 </p>
                 <p>
-                  <span className="font-semibold">Next Stop Info:</span>{' '}
+                  <span className={styles.bold}>Next Stop Info:</span>{' '}
                   {trainStatus.nextStopInfo}
                 </p>
               </div>
@@ -148,20 +140,18 @@ export default function TrainStatus() {
 
         {/* Popular Trains - Can be enhanced later */}
         {trainList.length > 0 && (
-          <div className="mt-10">
-            <h3 className="text-lg font-semibold mb-2 text-gray-800">
-              Popular Trains
-            </h3>
-            <ul className="divide-y divide-gray-200 border rounded-md bg-white shadow">
+          <div className={styles.popularTrains}>
+            <h3 className={styles.subHeading}>Popular Trains</h3>
+            <ul className={styles.trainList}>
               {trainList.map((train) => (
                 <li
                   key={train.train_number}
-                  className="p-3 hover:bg-gray-50 cursor-pointer transition"
+                  className={styles.trainItem}
                   onClick={() => setTrainInput(train.train_number)}
                 >
-                  <div className="text-sm">
+                  <div className={styles.trainInfo}>
                     <strong>{train.train_name}</strong> ({train.train_number})<br />
-                    <span className="text-gray-500 text-xs">
+                    <span className={styles.trainRoute}>
                       {train.source} → {train.destination}
                     </span>
                   </div>

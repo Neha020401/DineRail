@@ -1,0 +1,143 @@
+/* Container for the whole page */
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+/* Card for the train status area */
+.card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+}
+
+/* Heading for the card */
+.heading {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007acc;
+  margin-bottom: 20px;
+}
+
+/* Input container for train search */
+.inputContainer {
+  margin-bottom: 20px;
+}
+
+/* Input field styling */
+.input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  font-size: 16px;
+  outline: none;
+}
+
+.input:focus {
+  border-color: #007acc;
+  box-shadow: 0 0 3px rgba(0, 122, 204, 0.5);
+}
+
+/* Suggestions list styling */
+.suggestions {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-top: 5px;
+  background-color: #fff;
+}
+
+.suggestionItem {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestionItem:hover {
+  background-color: #f1f1f1;
+}
+
+/* Button styling */
+.button {
+  background-color: #007acc;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  width: 100%;
+  cursor: pointer;
+  font-size: 16px;
+  border: none;
+}
+
+.button:hover {
+  background-color: #005a8c;
+}
+
+/* Error message styling */
+.error {
+  color: #e53e3e;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+/* Train details section */
+.trainDetails {
+  margin-top: 30px;
+  background-color: #f9fafb;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.subHeading {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.detailsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  font-size: 14px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+/* Popular trains section */
+.popularTrains {
+  margin-top: 30px;
+}
+
+.trainList {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 15px;
+}
+
+.trainItem {
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.trainItem:hover {
+  background-color: #f1f1f1;
+}
+
+.trainInfo {
+  font-size: 14px;
+}
+
+.trainRoute {
+  color: #666;
+  font-size: 12px;
+}

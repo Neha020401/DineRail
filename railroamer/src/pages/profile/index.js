@@ -49,13 +49,6 @@ export default function ProfilePage() {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleLogout = async () => {
-    localStorage.removeItem('token');
-    try {
-      await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/auth/logout`);
-    } catch {}
-    router.push('/login');
-  };
 
   const handleSave = async () => {
     try {
@@ -112,10 +105,6 @@ export default function ProfilePage() {
               <div className="pt-2"><Link className="text-blue-600 underline" href="/upload">Upload Food</Link></div>
             </div>
           )}
-
-          <button onClick={handleLogout} className="mt-6 bg-red-600 text-white px-4 py-2 rounded w-full">
-            Logout
-          </button>
         </div>
       </div>
       <Footer />

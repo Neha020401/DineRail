@@ -31,11 +31,7 @@ export default function ProviderProfile() {
     fetchProfile();
   }, []);
 
-  const handleLogout = async () => {
-    localStorage.removeItem("token");
-    await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/auth/logout`);
-    router.push("/login");
-  };
+  
 
   if (!provider) return <div className="p-8">Loading...</div>;
 
@@ -60,12 +56,6 @@ export default function ProviderProfile() {
       <button className="mt-6 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
       ><Link href={'/upload'}>Upload Food</Link></button>
       </div>
-      <button
-        onClick={handleLogout}
-        className="mt-6 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
-      >
-        Logout
-      </button>
     </div>
     <Footer/>
     </>

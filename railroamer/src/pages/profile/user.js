@@ -33,12 +33,6 @@ export default function UserProfile() {
   }, []);
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    router.push('/login');
-  };
-
   
   const handleSave = async () => {
     try {
@@ -77,15 +71,6 @@ export default function UserProfile() {
           </div>
         )}
       </div>
-      {!editing && (
-  <button
-    onClick={handleLogout}
-    className="mt-2 bg-red-600 text-white px-4 py-2 rounded w-full"
-  >
-    Logout
-  </button>
-)}
-
     </div>
     <Footer/>
     </>

@@ -4,7 +4,7 @@ const db = require("../config/db");
 const { v4: uuidv4 } = require('uuid');
 
 const userLogin = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password,role } = req.body;
   const [users] = await db.execute("SELECT * FROM users WHERE email = ?", [
     email,
   ]);
@@ -20,11 +20,11 @@ const userLogin = async (req, res) => {
   const token = jwt.sign({ id: user.id, role: "USER" }, process.env.JWT_SECRET, {
     expiresIn: "1d",
   });
-  res.json({ token, user });
+  res.json({ token, user,role });
 };
 
 const providerLogin = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password ,role} = req.body;
   const [providers] = await db.execute(
     "SELECT * FROM providers WHERE email = ?",
     [email]
@@ -41,7 +41,7 @@ const providerLogin = async (req, res) => {
   const token = jwt.sign({ id: provider.id, role: "PROVIDER" }, process.env.JWT_SECRET, {
     expiresIn: "1d",
   });
-  res.json({ token, provider });
+  res.json({ token, provider,role });
 };
 
 const userSignUp = async (req, res) => {

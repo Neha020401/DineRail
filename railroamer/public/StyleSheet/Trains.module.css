@@ -1,54 +1,114 @@
 .container {
-    max-width: 32rem; /* max-w-lg */
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2.5rem; /* mt-10 */
-    background-color: white;
-    padding: 1.5rem; /* p-6 */
-    border-radius: 0.25rem; /* rounded */
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* shadow */
-  }
-  
-  .title {
-    font-size: 1.25rem; /* text-xl */
-    font-weight: bold;
-    margin-bottom: 1rem; /* mb-4 */
-  }
-  
-  .input {
-    width: 100%; /* w-full */
-    margin-bottom: 0.75rem; /* mb-3 */
-    padding: 0.5rem; /* p-2 */
-    border: 1px solid #e5e7eb; /* border */
-    border-radius: 0.25rem; /* rounded */
-  }
-  
-  .button {
-    width: 100%; /* w-full */
-    background-color: #2563eb; /* bg-blue-600 */
-    color: white;
-    padding: 0.5rem; /* p-2 */
-    border-radius: 0.25rem; /* rounded */
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-  }
-  
-  .button:hover {
-    background-color: #1d4ed8; /* slightly darker blue on hover */
-  }
-  
-  .statusContainer {
-    margin-top: 1rem; /* mt-4 */
-    padding: 1rem; /* p-4 */
-    background-color: #f3f4f6; /* bg-gray-100 */
-    border-radius: 0.25rem; /* rounded */
-  }
-  
-  .statusContainer p {
-    margin-bottom: 0.5rem;
-  }
-  
-  .statusContainer p:last-child {
-    margin-bottom: 0;
-  }
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(to top right, #e3f2fd, #bbdefb);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.formContainer {
+  width: 100%;
+  max-width: 960px;
+  background-color: white;
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  height: 50vh;
+  overflow-y: auto;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  color: #1976d2;
+  margin-bottom: 20px;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.select, .input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+.select:focus, .input:focus {
+  border-color: #1976d2;
+  outline: none;
+}
+
+.submitContainer {
+  grid-column: span 3;
+}
+
+.submitButton {
+  width: 100%;
+  background-color: #1976d2;
+  color: white;
+  padding: 16px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submitButton:hover {
+  background-color: #1565c0;
+}
+
+.tableContainer {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.tableHeader {
+  background-color: #1976d2;
+  color: white;
+  padding: 12px;
+  text-align: left;
+  font-weight: bold;
+}
+
+.tableRow:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.tableData {
+  padding: 12px;
+  border: 1px solid #ddd;
+}
+
+.noTrainsMessage {
+  text-align: center;
+  color: #555;
+  font-size: 18px;
+  margin-top: 20px;
+}

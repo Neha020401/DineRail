@@ -1,28 +1,61 @@
 .navbar {
-    background-color: #2563eb; /* bg-blue-600 */
-    padding: 1rem; /* p-4 */
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #1f2937; /* Dark gray */
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #ffffff;
+  transition: color 0.3s;
+}
+
+.logo:hover {
+  color: #3b82f6; /* Blue on hover */
+}
+
+.navLinks {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.navLink {
+  color: #d1d5db;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.navLink:hover {
+  color: #ffffff;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
   }
-  
-  .logo {
-    font-weight: bold;
-    font-size: 1.25rem; /* text-xl */
-  }
-  
+
   .navLinks {
-    display: flex;
-    gap: 1rem; /* space-x-4 */
+    flex-direction: column;
+    width: 100%;
+    margin-top: 0.5rem;
   }
-  
+
   .navLink {
-    color: white;
-    text-decoration: none;
-    transition: opacity 0.2s ease;
+    padding: 0.5rem 0;
+    width: 100%;
   }
-  
-  .navLink:hover {
-    opacity: 0.8;
-  }
+}

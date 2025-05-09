@@ -1,19 +1,55 @@
+/* Styles for the overall service section */
 .service {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two equal columns */
-    gap: 20px;
-    padding: 20px;
-    justify-items: center; /* Center each item horizontally */
-  }
-  
-  .service div {
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f9fafb;
+  padding: 2rem 0;
+}
 
-    padding-block: 30px;
-    border: 1px solid black;
-    text-align: center;
-    font-size: 25px;
-    font-weight: bolder;
-    width: 80%; /* Optional: makes items align better */
+/* Styling each card container */
+.service div {
+  margin: 1.5rem 0; /* Increased spacing between cards */
+  width: 300px; /* Fixed width for cards */
+}
+
+/* Styling the individual links as cards */
+.service a {
+  display: block;
+  padding: 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #333; /* Dark text */
+  text-decoration: none;
+  background-color: #ffffff;
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 8px; /* Slightly rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: all 0.3s ease;
+  text-transform: uppercase; /* Uppercase text */
+  margin: 0.5rem 0;
+}
+
+/* Hover effect for the cards */
+.service a:hover {
+  background-color: #007bff; /* Bootstrap primary color */
+  color: white;
+  transform: translateY(-5px); /* Lift effect */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Enhanced shadow */
+}
+
+/* Styling for mobile responsiveness */
+@media (max-width: 600px) {
+  .service {
+    padding: 1rem;
   }
-  
+
+  /* Adjust card width for smaller screens */
+  .service div {
+    width: 100%; /* Full width on smaller screens */
+    margin: 1rem 0;
+  }
+}
