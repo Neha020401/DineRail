@@ -31,4 +31,35 @@ router.get('/available-seats', async (req, res) => {
 // Book a ticket
 router.post('/book', authenticate('USER'), bookTicket);
 
+
+// Get booking details for logged-in user
+router.get('/bookingDetail', authenticate, async (req, res) => {
+    try {
+        const userId = req.user.id;
+
+        // Fetch bookings with passengers and payment details
+        const query = `
+            SELECT b.id, b.train_from, b.train_to, b.fare, b.date, b.seat_type, b.train_id, b.created_at,
+                   p.name AS passenger_name, p.age, p.gender, p.address, 
+                   pay.amount, pay.status
+            FROM bookings AS b
+            LEFT JOIN passengers AS p ON b.id = p.booking_id
+            LEFT JOIN payments AS pay ON b.id = pay.booking_id
+            WHERE b.user_id = ?;
+        `;
+        const [rows] = await db.execute(query, [userId]);
+
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'No bookings found' });
+        }
+
+        res.json(rows);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+
+
 module.exports = router;
