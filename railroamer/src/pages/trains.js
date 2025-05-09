@@ -85,7 +85,7 @@ export default function Trains() {
 
   return (
     <>
-      <Navbar />
+  
       <div className="max-w-6xl mx-auto mt-10 px-4">
         <div className="bg-white shadow-xl rounded-2xl p-6">
           <h2 className="text-3xl font-bold text-blue-700 mb-6">
