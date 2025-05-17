@@ -18,13 +18,15 @@ if (!fs.existsSync(uploadDir)) {
 
 // Middleware
 app.use(cors());
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // Serve static uploads
 
 // Routes
 const authRoutes = require("./routes/authroutes");
 const userRoutes = require("./routes/userRoutes");
 const providerRoutes = require("./routes/providerRoutes");
+const trainRoutes = require('./routes/trainRoutes');
 const bookingRoutes = require("./routes/bookingRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const paymentRoutes = require("./routes/paymentRoutes");
@@ -35,7 +37,8 @@ const reviewRoutes =require("./routes/reviewRoutes")
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/provider", providerRoutes);
-app.use("/api/bookings", bookingRoutes);
+app.use('/api/trains', trainRoutes);
+app.use('/api/bookings', bookingRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/food-items", foodRoutes);
