@@ -24,6 +24,23 @@ export default function OrderPage() {
   }, [id]);
 
   const handleOrder = async () => {
+  // Check if all fields are filled
+  if (!order.quantity || !order.train_name || !order.train_no || !order.seat_number) {
+    alert("Missing fields required");
+    return;
+  }
+
+  // Log the order details for debugging
+  console.log("Order details:", {
+    food_item_id: food.id,
+    provider_id: food.provider_id,
+    quantity: Number(order.quantity), // Ensuring quantity is a number
+    train_name: order.train_name,
+    train_no: order.train_no,
+    seat_number: order.seat_number,
+  });
+
+  try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/orders/place`,
       {
@@ -35,7 +52,7 @@ export default function OrderPage() {
         body: JSON.stringify({
           food_item_id: food.id,
           provider_id: food.provider_id,
-          quantity: order.quantity,
+          quantity: Number(order.quantity), // Convert to number
           train_name: order.train_name,
           train_no: order.train_no,
           seat_number: order.seat_number,
@@ -46,7 +63,7 @@ export default function OrderPage() {
     const data = await res.json();
     if (data.order_id) {
       await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}payments/food/pay`,
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/payments/food/pay`,
         {
           method: "POST",
           headers: {
@@ -60,11 +77,16 @@ export default function OrderPage() {
         }
       );
       alert("Order placed and paid successfully!");
-      router.push("/orders"); // Redirect to orders page after success
+      router.push("/orders");
     } else {
       alert(data.message);
     }
-  };
+  } catch (error) {
+    console.error("Error placing order:", error);
+    alert("An error occurred while placing the order.");
+  }
+};
+
 
   if (!food) return <p>Loading...</p>;
 

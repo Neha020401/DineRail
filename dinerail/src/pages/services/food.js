@@ -26,7 +26,7 @@ export default function FoodPage() {
                 className={styles.image}
                 alt={item.name}
               />
-              <h2 className={styles.title}>{item.name}</h2>
+              <h2 className={styles.title}>{item.food_name}</h2>
               <p className={styles.price}>₹{item.price}</p>
               <p className={styles.info}>
                 {item.provider_type === "TRAIN_SERVICE"

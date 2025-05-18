@@ -61,7 +61,7 @@ export default function Navbar() {
         <div className={styles.logo}>DineRail</div>
       </Link>
       <div className={styles.navLinks}>
-        <Link href="./services/food" className={styles.navLink}>
+        <Link href="/services/food" className={styles.navLink}>
           Food
         </Link>
         <Link href="/train-status" className={styles.navLink}>
