@@ -13,12 +13,11 @@ router.post('/place', authenticate('USER'), async (req, res) => {
   }
 
   try {
-    const [foodItemRows] = await db.execute('SELECT price FROM food_items WHERE id = ?', [food_item_id]);
-    if (foodItemRows.length === 0) return res.status(404).json({ message: 'Food item not found' });
+    const [foodItem] = await db.execute('SELECT price FROM food_items WHERE id = ?', [food_item_id]);
+    if (!foodItem.length) return res.status(404).json({ message: 'Food item not found' });
 
-    const total_price = foodItemRows[0].price * quantity;
-
-    const orderId = `order_${Date.now()}`; // Generate order ID if needed
+    const total_price = foodItem[0].price * quantity;
+    const orderId = `order_${Date.now()}`;
 
     await db.execute(
       'INSERT INTO food_orders (id, user_id, provider_id, food_item_id, quantity, total_price, train_no, train_name, seat_number, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
@@ -31,6 +30,7 @@ router.post('/place', authenticate('USER'), async (req, res) => {
     res.status(500).json({ error: 'Failed to place order' });
   }
 });
+
 
 // Submit review and comment for a completed order
 router.patch('/:id/review', authenticate('USER'), async (req, res) => {

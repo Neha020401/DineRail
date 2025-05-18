@@ -4,6 +4,7 @@ const router = express.Router();
 const db = require("../config/db");
 const { v4: uuidv4 } = require("uuid");
 
+
 router.get("/", async (req, res) => {
   try {
     const [items] = await db.execute(`
@@ -112,5 +113,50 @@ router.post("food-items/place", async (req, res) => {
     res.status(500).json({ message: "Failed to place order" });
   }
 });
+
+
+
+// Middleware to verify provider
+const verifyProvider = (req, res, next) => {
+  if (!req.user || req.user.role !== "PROVIDER") {
+    return res.status(403).json({ message: "Access denied" });
+  }
+  next();
+};
+
+// Fetch all food items for the logged-in provider
+router.get("/provider", verifyProvider, async (req, res) => {
+  try {
+    const [items] = await db.execute(
+      `
+      SELECT id, name, description, price, image_url, created_at
+      FROM food_items
+      WHERE provider_id = ?
+      ORDER BY created_at DESC
+      `,
+      [req.user.id]
+    );
+    res.json(items);
+  } catch (error) {
+    console.error("Error fetching provider's food items:", error);
+    res.status(500).json({ error: "Failed to fetch items" });
+  }
+});
+
+// Delete a specific food item by ID
+router.delete("/:id", verifyProvider, async (req, res) => {
+  const { id } = req.params;
+  try {
+    await db.execute(
+      "DELETE FROM food_items WHERE id = ? AND provider_id = ?",
+      [id, req.user.id]
+    );
+    res.json({ message: "Food item deleted" });
+  } catch (error) {
+    console.error("Error deleting food item:", error);
+    res.status(500).json({ error: "Delete failed" });
+  }
+});
+
 
 module.exports = router;

@@ -115,7 +115,7 @@ export default function Navbar() {
                 <Link href="/upload" className={styles.navLink}>
                   Upload Food
                 </Link>
-                <Link href="/store" className={styles.navLink}>
+                <Link href="/mystore" className={styles.navLink}>
                   Your Store
                 </Link>
               </div>

@@ -19,7 +19,7 @@ export default function FoodPage() {
       <Navbar />
       <div className={styles.gridContainer}>
         {items.map((item) => (
-          <Link href={`/services/food/${item.id}`} key={item.id}>
+          <Link href={`/food/${item.id}`} key={item.id}>
             <div className={styles.card}>
               <img
                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL + item.image_url}`}
