@@ -31,4 +31,13 @@ const authenticate = (expectedRole) => {
   };
 };
 
-module.exports = authenticate;
+// Middleware to verify provider
+const verifyProvider = (req, res, next) => {
+  const { role } = req.body;
+  if (!role || role !== "PROVIDER") {
+    return res.status(403).json({ message: "Access denied" });
+  }
+  next();
+};
+
+module.exports = { authenticate, verifyProvider };

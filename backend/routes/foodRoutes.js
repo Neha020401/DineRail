@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../config/db");
 const { v4: uuidv4 } = require("uuid");
-
+const  { authenticate, verifyProvider } = require("../middleware/auth");
 
 router.get("/", async (req, res) => {
   try {
@@ -115,17 +115,8 @@ router.post("food-items/place", async (req, res) => {
 });
 
 
-
-// Middleware to verify provider
-const verifyProvider = (req, res, next) => {
-  if (!req.user || req.user.role !== "PROVIDER") {
-    return res.status(403).json({ message: "Access denied" });
-  }
-  next();
-};
-
 // Fetch all food items for the logged-in provider
-router.get("/provider", verifyProvider, async (req, res) => {
+router.post("/provider", verifyProvider, async (req, res) => {
   try {
     const [items] = await db.execute(
       `
@@ -134,7 +125,7 @@ router.get("/provider", verifyProvider, async (req, res) => {
       WHERE provider_id = ?
       ORDER BY created_at DESC
       `,
-      [req.user.id]
+      [req.body.id]
     );
     res.json(items);
   } catch (error) {

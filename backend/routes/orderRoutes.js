@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
-const authenticate = require('../middleware/auth');
+const {authenticate} = require('../middleware/auth');
 
 // Place food order (train or station vendor)
 router.post('/place', authenticate('USER'), async (req, res) => {

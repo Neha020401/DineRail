@@ -26,6 +26,7 @@ export default function Login() {
       const res = await axios.post(endpoint, { email, password,role })
       localStorage.setItem("token", res.data.token)
       localStorage.setItem("user", JSON.stringify(res.data))
+      
       router.push(role === "USER" ? "/profile/user" : "/profile/provider")
     } catch (err) {
       alert("Login failed: " + (err.response?.data?.message || "Unknown error"))
