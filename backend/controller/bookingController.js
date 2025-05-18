@@ -1,3 +1,4 @@
+//backend/controller/bookingController
 const db = require('../config/db');
 const { v4: uuidv4 } = require('uuid');
 

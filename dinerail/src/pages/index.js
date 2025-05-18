@@ -3,14 +3,14 @@
 import Navbar from '../components/Navbar';
 import styles from '../../public/StyleSheet/Home.module.css';
 import Footer from '@/components/Footer';
-import Trains from './trains'
+// import Trains from './train'
 
 export default function Home() {
   return (
     <>
       <Navbar />
       <div className={styles.heroSection}>
-        <Trains/>
+        {/* <Trains/> */}
       </div>
       <Footer/>
     </>

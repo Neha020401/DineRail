@@ -1,3 +1,4 @@
+//backend/controller/trainController
 const db = require('../config/db');
 const { v4: uuidv4 } = require('uuid');
 
@@ -187,3 +188,25 @@ exports.deleteTrainByNumber = async (req, res) => {
     conn.release();
   }
 };
+
+
+// backend/controller/trainController.js
+exports.getTrainById = async (req, res) => {
+  const { trainId } = req.params;
+  try {
+    const [train] = await db.query(`
+      SELECT * FROM trains
+      WHERE train_number = ?
+    `, [trainId]);
+
+    if (train.length === 0) {
+      return res.status(404).json({ error: 'Train not found' });
+    }
+
+    res.json(train[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+};
+

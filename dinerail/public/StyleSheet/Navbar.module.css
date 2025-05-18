@@ -40,6 +40,8 @@
   color: #ffffff;
 }
 
+
+
 /* Responsive for smaller screens */
 @media (max-width: 768px) {
   .navbar {
@@ -59,3 +61,37 @@
     width: 100%;
   }
 }
+
+
+.profileWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.profileHover {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  display: none;
+  flex-direction: column;
+  z-index: 1000;
+  min-width: 150px;
+}
+
+.profileHover.show {
+  display: flex;
+}
+
+.profilenav {
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+
+.profilenav:hover {
+  background-color: #f0f0f0;
+}
+

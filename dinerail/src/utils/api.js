@@ -5,6 +5,7 @@ const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_BASE_URL, // Replace with your backend API URL
 });
 
+
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token'); // Get token from localStorage
