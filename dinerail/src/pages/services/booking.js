@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import styles from "../../../public/StyleSheet/Booking.module.css"; // Import CSS module
 
 export default function Booking() {
   const [from, setFrom] = useState("");
@@ -14,22 +15,25 @@ export default function Booking() {
   const [ticketAmount, setTicketAmount] = useState(0);
 
   const handleSearchTrains = async () => {
-    const options = {
-      method: "GET",
-      url: "https://example-rapidapi-train-endpoint.com/search",
-      params: { from, to },
-      headers: {
-        "X-RapidAPI-Key": process.env.NEXT_PUBLIC_RAPIDAPI_KEY,
-        "X-RapidAPI-Host": "example-rapidapi-train-endpoint.com",
-      },
-    };
-    const res = await axios.request(options);
-    setTrains(res.data.trains || []);
+    try {
+      const options = {
+        method: "GET",
+        url: "https://example-rapidapi-train-endpoint.com/search",
+        params: { from, to },
+        headers: {
+          "X-RapidAPI-Key": process.env.NEXT_PUBLIC_RAPIDAPI_KEY,
+          "X-RapidAPI-Host": "example-rapidapi-train-endpoint.com",
+        },
+      };
+      const res = await axios.request(options);
+      setTrains(res.data.trains || []);
+    } catch (error) {
+      console.error("Error fetching trains:", error);
+    }
   };
 
-  const handleSelectTrain = async (train) => {
+  const handleSelectTrain = (train) => {
     setSelectedTrain(train);
-    // Mock seat data here
     setAvailableSeats(train.available_seats || 50);
     setTicketAmount(train.ticket_price || 100);
   };
@@ -47,39 +51,37 @@ export default function Booking() {
   return (
     <>
       <Navbar />
-      <div className="p-6 max-w-4xl mx-auto">
-        <h1 className="text-2xl font-bold mb-4">Book Your Train</h1>
+      <div className={styles.container}>
+        <h1 className={styles.heading}>Book Your Train</h1>
 
-        {/* Source and Destination */}
-        <div className="grid grid-cols-2 gap-4 mb-4">
+        {/* From and To */}
+        <div className={styles.gridTwoCols}>
           <input
             type="text"
-            className="border p-2 rounded"
             placeholder="From (e.g., Delhi)"
+            className={styles.input}
             value={from}
             onChange={(e) => setFrom(e.target.value)}
           />
           <input
             type="text"
-            className="border p-2 rounded"
             placeholder="To (e.g., Mumbai)"
+            className={styles.input}
             value={to}
             onChange={(e) => setTo(e.target.value)}
           />
         </div>
-        <button
-          onClick={handleSearchTrains}
-          className="bg-blue-500 text-white px-4 py-2 rounded mb-6"
-        >
+
+        <button className={styles.buttonPrimary} onClick={handleSearchTrains}>
           Search Trains
         </button>
 
         {/* Train Dropdown */}
         {trains.length > 0 && (
-          <div className="mb-6">
-            <label className="block mb-2 font-semibold">Select Train:</label>
+          <div className={styles.trainDropdown}>
+            <label className={styles.label}>Select Train:</label>
             <select
-              className="border p-2 w-full rounded"
+              className={styles.select}
               onChange={(e) => handleSelectTrain(JSON.parse(e.target.value))}
             >
               <option value="">-- Choose Train --</option>
@@ -92,40 +94,34 @@ export default function Booking() {
           </div>
         )}
 
-        {/* Show Seat Selection and Passenger Details */}
+        {/* Seats and Passenger Info */}
         {selectedTrain && (
           <>
-            <div className="mb-4">
-              <p>
-                <strong>Available Seats:</strong> {availableSeats}
-              </p>
-              <p>
-                <strong>Ticket Price:</strong> ₹{ticketAmount} per seat
-              </p>
+            <div className={styles.infoBox}>
+              <p><strong>Available Seats:</strong> {availableSeats}</p>
+              <p><strong>Ticket Price:</strong> ₹{ticketAmount} per seat</p>
             </div>
 
-            <div className="mb-4">
-              <label className="block mb-2 font-semibold">
-                Number of Seats:
-              </label>
+            <div className={styles.inputGroup}>
+              <label className={styles.label}>Number of Seats:</label>
               <input
                 type="number"
                 min="1"
                 max={availableSeats}
+                className={styles.input}
                 value={numSeats}
                 onChange={(e) => setNumSeats(Number(e.target.value))}
-                className="border p-2 w-full rounded"
               />
             </div>
 
-            <h2 className="text-lg font-semibold mb-2">Passenger Details</h2>
+            <h2 className={styles.subHeading}>Passenger Details</h2>
             {passengers.map((p, idx) => (
-              <div key={idx} className="border p-4 rounded mb-4">
-                <p className="font-medium">Passenger {idx + 1}</p>
+              <div key={idx} className={styles.passengerCard}>
+                <p className={styles.passengerCardTitle}>Passenger {idx + 1}</p>
                 <input
                   type="text"
                   placeholder="Name"
-                  className="border p-2 rounded w-full mb-2"
+                  className={styles.passengerInput}
                   onChange={(e) =>
                     handlePassengerChange(idx, "name", e.target.value)
                   }
@@ -133,7 +129,7 @@ export default function Booking() {
                 <input
                   type="number"
                   placeholder="Age"
-                  className="border p-2 rounded w-full mb-2"
+                  className={styles.passengerInput}
                   onChange={(e) =>
                     handlePassengerChange(idx, "age", e.target.value)
                   }
@@ -141,7 +137,7 @@ export default function Booking() {
                 <input
                   type="text"
                   placeholder="Aadhar Number"
-                  className="border p-2 rounded w-full"
+                  className={styles.passengerInput}
                   onChange={(e) =>
                     handlePassengerChange(idx, "aadhar", e.target.value)
                   }
@@ -149,14 +145,11 @@ export default function Booking() {
               </div>
             ))}
 
-            <div className="mt-6 font-bold text-lg">
+            <div className={styles.totalAmount}>
               Total Amount: ₹{ticketAmount * numSeats}
             </div>
 
-            {/* Submit Button */}
-            <button className="bg-green-600 text-white px-6 py-2 mt-4 rounded">
-              Proceed to Payment
-            </button>
+            <button className={styles.proceedButton}>Proceed to Payment</button>
           </>
         )}
       </div>

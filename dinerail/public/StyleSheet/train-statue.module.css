@@ -1,3 +1,11 @@
+body {
+  background-image: url("./images/train_scenery.jpg"); /* replace with your actual image path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
 /* Container for the whole page */
 .container {
   max-width: 800px;

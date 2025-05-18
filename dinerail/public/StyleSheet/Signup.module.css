@@ -1,0 +1,81 @@
+.container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+.heading {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.roleSelection {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+.roleCard {
+  flex: 1;
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease;
+  user-select: none;
+  background-color: white;
+}
+
+.roleCard:hover {
+  box-shadow: 0 0 8px rgba(0,0,0,0.15);
+}
+
+.roleIcon {
+  margin-bottom: 0.5rem;
+  color: #0070f3;
+  width: 36px;
+  height: 36px;
+  display: inline-block;
+}
+
+.formInput {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  background-color: #0070f3;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #005bb5;
+}
+
+.button[disabled] {
+  background-color: #999;
+  cursor: not-allowed;
+}

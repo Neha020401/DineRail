@@ -1,0 +1,10 @@
+__turbopack_load_page_chunks__("/signup", [
+  "static/chunks/[root-of-the-server]__3e3d980e._.js",
+  "static/chunks/node_modules_next_43350194._.js",
+  "static/chunks/node_modules_react-dom_82bb97c6._.js",
+  "static/chunks/node_modules_axios_lib_9aa2336a._.js",
+  "static/chunks/node_modules_ada24a0e._.js",
+  "static/chunks/public_StyleSheet_Navbar_module_5577c9f3.css",
+  "static/chunks/src_pages_signup_5771e187._.js",
+  "static/chunks/src_pages_signup_e3f27b98._.js"
+])

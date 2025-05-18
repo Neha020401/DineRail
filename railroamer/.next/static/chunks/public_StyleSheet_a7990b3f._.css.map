@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file://C%3A/Users/tanu/Documents/New%20folder/RailRoamer/railroamer/public/StyleSheet/Navbar.module.css"],"sourcesContent":["\r\n.navbar {\r\n  background: #1a365d;\r\n  padding: 1rem 2rem;\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\r\n}\r\n\r\n.logo {\r\n  color: white;\r\n  font-size: 1.5rem;\r\n  font-weight: bold;\r\n  text-decoration: none;\r\n}\r\n\r\n.navLinks {\r\n  display: flex;\r\n  gap: 1.5rem;\r\n  align-items: center;\r\n}\r\n\r\n.navLink {\r\n  color: white;\r\n  text-decoration: none;\r\n  font-weight: 500;\r\n  transition: color 0.2s;\r\n}\r\n\r\n.navLink:hover {\r\n  color: #4299e1;\r\n}\r\n"],"names":[],"mappings":"AACA;;;;;;;;;AASA;;;;;;;AAOA;;;;;;AAMA;;;;;;;AAOA","debugId":null}},
+    {"offset": {"line": 36, "column": 0}, "map": {"version":3,"sources":["file://C%3A/Users/tanu/Documents/New%20folder/RailRoamer/railroamer/public/StyleSheet/Home.module.css"],"sourcesContent":["\r\n.heroSection {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    height: 80vh;\r\n    background-color: #dbeafe; /* bg-blue-100 */\r\n  }\r\n  \r\n  .heroTitle {\r\n    font-size: 2.25rem; /* text-4xl */\r\n    font-weight: bold;\r\n    color: #1f2937; /* text-gray-800 */\r\n  }"],"names":[],"mappings":"AACA;;;;;;;;AAQE","debugId":null}}]
+}

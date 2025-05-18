@@ -1,0 +1,10 @@
+__turbopack_load_page_chunks__("/profile/provider", [
+  "static/chunks/node_modules_next_4a3e940a._.js",
+  "static/chunks/node_modules_react-dom_82bb97c6._.js",
+  "static/chunks/node_modules_axios_lib_9aa2336a._.js",
+  "static/chunks/node_modules_16653cc4._.js",
+  "static/chunks/[root-of-the-server]__07b22933._.js",
+  "static/chunks/public_StyleSheet_Navbar_module_5577c9f3.css",
+  "static/chunks/src_pages_profile_provider_5771e187.js",
+  "static/chunks/src_pages_profile_provider_5c4afee4.js"
+])

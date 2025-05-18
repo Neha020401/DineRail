@@ -1,0 +1,9 @@
+__turbopack_load_page_chunks__("/train-status", [
+  "static/chunks/node_modules_next_2c26dd28._.js",
+  "static/chunks/node_modules_react-dom_82bb97c6._.js",
+  "static/chunks/node_modules_2a5cf4bb._.js",
+  "static/chunks/[root-of-the-server]__1f178c9e._.js",
+  "static/chunks/public_StyleSheet_Navbar_module_5577c9f3.css",
+  "static/chunks/src_pages_train-status_5771e187._.js",
+  "static/chunks/src_pages_train-status_4888a61c._.js"
+])

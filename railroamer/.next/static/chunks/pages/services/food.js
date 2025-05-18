@@ -1,0 +1,8 @@
+__turbopack_load_page_chunks__("/services/food", [
+  "static/chunks/node_modules_next_dist_f1d2d383._.js",
+  "static/chunks/node_modules_react-dom_82bb97c6._.js",
+  "static/chunks/node_modules_a51498a5._.js",
+  "static/chunks/[root-of-the-server]__57d4a1c7._.js",
+  "static/chunks/src_pages_services_food_5771e187.js",
+  "static/chunks/src_pages_services_food_03689963.js"
+])

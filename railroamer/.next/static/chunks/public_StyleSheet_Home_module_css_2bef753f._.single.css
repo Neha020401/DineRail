@@ -1,0 +1,16 @@
+/* [project]/public/StyleSheet/Home.module.css [client] (css) */
+.Home-module__vJHdFG__heroSection {
+  background-color: #dbeafe;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  display: flex;
+}
+
+.Home-module__vJHdFG__heroTitle {
+  color: #1f2937;
+  font-size: 2.25rem;
+  font-weight: bold;
+}
+
+/*# sourceMappingURL=public_StyleSheet_Home_module_css_2bef753f._.single.css.map*/

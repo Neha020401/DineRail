@@ -9,23 +9,22 @@ export default function Services() {
       <Navbar />
       <div className={styles.service}>
         <div>
-          <Link href={"/services/booking"} >Bookings</Link>
+          <img src="/StyleSheet/images/train.jpg" alt="Bookings" />
+          <Link href={"/services/booking"}>Bookings</Link>
         </div>
         <div>
-        <Link href={"/services/mybookings"} >Your Bookings</Link>
+            <img src="/StyleSheet/images/your_booking.jpg" alt="Your Bookings" />
+          <Link href={"/services/mybookings"}>Your Bookings</Link>
         </div>
         <div>
-          <Link href={"/services/food"}> Food </Link>
+            <img src="/StyleSheet/images/food.jpg" alt="Food" />
+          <Link href={"/services/food"}>Food</Link>
         </div>
-        {/* <div>
-          <Link href={"/services/order"}> Orders </Link>
-        </div> */}
         <div>
-        <Link href={"/services/myorders"}>Your Orders</Link>
+           <img src="/StyleSheet/images/your_order.jpg" alt="Your Orders" />
+          <Link href={"/services/myorders"}>Your Orders</Link>
         </div>
-        
       </div>
-
       <Footer />
     </div>
   );

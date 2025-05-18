@@ -1,4 +1,3 @@
-// pages/profile-provider.js
 "use client";
 
 import Link from "next/link";
@@ -7,6 +6,7 @@ import { useRouter } from "next/router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import axios from "axios";
+import styles from "../../../public/StyleSheet/provider.module.css"; // Import CSS module
 
 export default function ProviderProfile() {
   const router = useRouter();
@@ -31,33 +31,29 @@ export default function ProviderProfile() {
     fetchProfile();
   }, []);
 
-  
-
-  if (!provider) return <div className="p-8">Loading...</div>;
+  if (!provider) return <div className={styles.loading}>Loading...</div>;
 
   return (
     <>
-    <Navbar/>
-    
-    <div className="p-8 max-w-xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6">Provider Profile</h1>
-      <p><strong>Name:</strong> {provider.name}</p>
-      <p><strong>Email:</strong> {provider.email}</p>
-      <p><strong>Type:</strong> {provider.provider_type}</p>
-      {provider.provider_type === "TRAIN_SERVICE" ? (
-        <>
-          <p><strong>Train Name:</strong> {provider.train_name}</p>
-          <p><strong>Train Number:</strong> {provider.train_number}</p>
-        </>
-      ) : (
-        <p><strong>Station Name:</strong> {provider.station_name}</p>
-      )}
-      <div>
-      <button className="mt-6 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
-      ><Link href={'/upload'}>Upload Food</Link></button>
+      <Navbar />
+      <div className={styles.container}>
+        <h1 className={styles.title}>Provider Profile</h1>
+        <p><strong>Name:</strong> {provider.name}</p>
+        <p><strong>Email:</strong> {provider.email}</p>
+        <p><strong>Type:</strong> {provider.provider_type}</p>
+        {provider.provider_type === "TRAIN_SERVICE" ? (
+          <>
+            <p><strong>Train Name:</strong> {provider.train_name}</p>
+            <p><strong>Train Number:</strong> {provider.train_number}</p>
+          </>
+        ) : (
+          <p><strong>Station Name:</strong> {provider.station_name}</p>
+        )}
+        <div>
+          <Link href="/upload" className={styles.uploadBtn}>Upload Food</Link>
+        </div>
       </div>
-    </div>
-    <Footer/>
+      <Footer />
     </>
   );
 }

@@ -1,0 +1,94 @@
+/* [project]/public/StyleSheet/Services.module.css [client] (css) */
+.Services-module__d5wCqa__service {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  min-height: calc(100vh - 220px);
+  margin: 3rem auto;
+  padding: 2.5rem;
+  display: grid;
+}
+
+.Services-module__d5wCqa__service > div {
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform .3s ease-in-out, box-shadow .3s ease-in-out, border-color .3s;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 6px #0000000a, 0 5px 15px #00000014;
+}
+
+.Services-module__d5wCqa__service > div:hover {
+  border-color: #007bff;
+  transform: translateY(-8px)scale(1.02);
+  box-shadow: 0 8px 12px #0000000f, 0 10px 25px #0000001a;
+}
+
+.Services-module__d5wCqa__service > div > a {
+  color: #343a40;
+  text-align: center;
+  z-index: 1;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 2.5rem 1.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color .2s;
+  display: flex;
+}
+
+.Services-module__d5wCqa__service > div:hover > a {
+  color: #007bff;
+}
+
+@media (width <= 992px) {
+  .Services-module__d5wCqa__service {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+
+  .Services-module__d5wCqa__service > div > a {
+    padding: 2rem 1.2rem;
+    font-size: 1.15rem;
+  }
+}
+
+@media (width <= 768px) {
+  .Services-module__d5wCqa__service {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .Services-module__d5wCqa__service > div > a {
+    padding: 1.8rem 1rem;
+    font-size: 1.1rem;
+  }
+}
+
+@media (width <= 576px) {
+  .Services-module__d5wCqa__service {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .Services-module__d5wCqa__service > div > a {
+    padding: 1.5rem;
+    font-size: 1.05rem;
+  }
+
+  .Services-module__d5wCqa__service > div:hover {
+    transform: translateY(-5px)scale(1.01);
+  }
+}
+
+/*# sourceMappingURL=public_StyleSheet_Services_module_css_2bef753f._.single.css.map*/

@@ -1,0 +1,35 @@
+/* [project]/public/StyleSheet/Navbar.module.css [client] (css) */
+.Navbar-module__N26dHG__navbar {
+  background: #1a365d;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  display: flex;
+  box-shadow: 0 2px 4px #0000001a;
+}
+
+.Navbar-module__N26dHG__logo {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.Navbar-module__N26dHG__navLinks {
+  align-items: center;
+  gap: 1.5rem;
+  display: flex;
+}
+
+.Navbar-module__N26dHG__navLink {
+  color: #fff;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color .2s;
+}
+
+.Navbar-module__N26dHG__navLink:hover {
+  color: #4299e1;
+}
+
+/*# sourceMappingURL=public_StyleSheet_Navbar_module_css_2bef753f._.single.css.map*/

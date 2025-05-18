@@ -1,9 +1,9 @@
-//page/upload.js
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import styles from '../../public/StyleSheet/uplod.module.css'; // import CSS
 
 export default function UploadFood() {
   const router = useRouter();
@@ -26,32 +26,27 @@ export default function UploadFood() {
     fetchProfile();
   }, []);
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleImageChange = (e) => {
-    setImage(e.target.files[0]);
-  };
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const handleImageChange = (e) => setImage(e.target.files[0]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (!form.name || !form.price || !image) {
       setMessage('Please fill all required fields');
       return;
     }
-  
+
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const providerId = user?.provider?.id;
     const providerName = user?.provider?.name || 'Provider';
-    
+
     if (!providerId) {
       setMessage('Invalid provider session. Please log in again.');
       router.push('/login');
       return;
     }
-  
+
     const formData = new FormData();
     formData.append('providerId', providerId);
     formData.append('providerName', providerName);
@@ -59,7 +54,7 @@ export default function UploadFood() {
     formData.append('description', form.description);
     formData.append('price', form.price);
     formData.append('image', image);
-  
+
     try {
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/provider/food`,
@@ -71,7 +66,6 @@ export default function UploadFood() {
           },
         }
       );
-  
       setMessage('Food item uploaded successfully');
       setForm({ name: '', description: '', price: '' });
       setImage(null);
@@ -79,28 +73,25 @@ export default function UploadFood() {
       setMessage('Upload failed');
     }
   };
-  
 
   if (role !== 'PROVIDER') {
-    return <p className="text-center mt-10">Unauthorized. Only providers can upload items.</p>;
+    return <p className={styles.unauthorized}>Unauthorized. Only providers can upload items.</p>;
   }
 
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center py-10 px-4">
-        <div className="bg-white rounded-2xl shadow-md p-6 max-w-lg w-full">
-          <h2 className="text-2xl font-semibold text-center mb-6">Upload Food Item</h2>
-          {message && <p className="text-center mb-4 text-red-500">{message}</p>}
-
-          <form onSubmit={handleSubmit} className="space-y-4">
+      <div className={styles.page}>
+        <div className={styles.formCard}>
+          <h2 className={styles.heading}>Upload Food Item</h2>
+          {message && <p className={styles.message}>{message}</p>}
+          <form onSubmit={handleSubmit} className={styles.form}>
             <input
               type="text"
               name="name"
               value={form.name}
               onChange={handleChange}
               placeholder="Food Name"
-              className="w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
             <textarea
@@ -109,7 +100,6 @@ export default function UploadFood() {
               onChange={handleChange}
               placeholder="Description"
               rows="3"
-              className="w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             ></textarea>
             <input
               type="number"
@@ -117,23 +107,15 @@ export default function UploadFood() {
               value={form.price}
               onChange={handleChange}
               placeholder="Price"
-              className="w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
             <input
               type="file"
               accept="image/*"
               onChange={handleImageChange}
-              className="w-full"
-             
               required
             />
-            <button
-              type="submit"
-              className="bg-green-600 hover:bg-green-700 text-white w-full py-2 rounded font-semibold transition duration-200"
-            >
-              Upload
-            </button>
+            <button type="submit">Upload</button>
           </form>
         </div>
       </div>

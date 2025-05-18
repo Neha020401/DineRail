@@ -1,10 +1,10 @@
-//pages/mystore.js
 "use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import styles from "../../public/StyleSheet/mystore.module.css";
 
 export default function MyStore() {
   const [foodItems, setFoodItems] = useState([]);
@@ -19,10 +19,10 @@ export default function MyStore() {
         const id = user.provider.id;
         const role = user.role;
         const response = await axios.post(
-          `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/food-items/provider`, 
+          `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/food-items/provider`,
           {
             id,
-            role
+            role,
           },
           {
             headers: {
@@ -58,34 +58,32 @@ export default function MyStore() {
   };
 
   return (
-    <div className="p-5">
+    <div className={styles.container}>
       <Navbar />
-      <h2 className="text-2xl font-semibold mb-4">My Store</h2>
-      <Link href="/upload">
-        <button className="bg-blue-600 text-white p-2 rounded mb-4">
-          Add Food Item
-        </button>
+      <h2 className={styles.heading}>My Store</h2>
+      <Link href="/upload" className={styles.btnAdd}>
+        Add Food Item
       </Link>
-      {message && <p className="text-red-500">{message}</p>}
+      {message && <p className={styles.message}>{message}</p>}
       {loading ? (
         <p>Loading...</p>
       ) : foodItems.length === 0 ? (
         <p>No food items uploaded yet.</p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className={styles.grid}>
           {foodItems.map((item) => (
-            <div key={item.id} className="border p-3 rounded shadow">
+            <div key={item.id} className={styles.card}>
               <img
                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL + item.image_url}`}
                 alt={item.name}
-                className="w-full h-32 object-cover rounded mb-2"
+                className={styles.image}
               />
-              <h3 className="text-xl font-medium">{item.name}</h3>
-              <p className="text-gray-600">{item.description}</p>
-              <p className="text-green-600 font-semibold">₹{item.price}</p>
+              <h3 className={styles.foodName}>{item.name}</h3>
+              <p className={styles.description}>{item.description}</p>
+              <p className={styles.price}>₹{item.price}</p>
               <button
                 onClick={() => handleDelete(item.id)}
-                className="mt-2 bg-red-600 text-white p-2 rounded"
+                className={styles.btnDelete}
               >
                 Delete
               </button>

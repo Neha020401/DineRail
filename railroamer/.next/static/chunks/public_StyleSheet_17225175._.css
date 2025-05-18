@@ -1,0 +1,186 @@
+/* [project]/public/StyleSheet/Navbar.module.css [client] (css) */
+.Navbar-module__N26dHG__navbar {
+  background: #1a365d;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  display: flex;
+  box-shadow: 0 2px 4px #0000001a;
+}
+
+.Navbar-module__N26dHG__logo {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.Navbar-module__N26dHG__navLinks {
+  align-items: center;
+  gap: 1.5rem;
+  display: flex;
+}
+
+.Navbar-module__N26dHG__navLink {
+  color: #fff;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color .2s;
+}
+
+.Navbar-module__N26dHG__navLink:hover {
+  color: #4299e1;
+}
+
+
+/* [project]/public/StyleSheet/Trains.module.css [client] (css) */
+.Trains-module__IYMtEq__container {
+  background: linear-gradient(135deg, #f6f9fc 0%, #edf2ff 100%);
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+
+.Trains-module__IYMtEq__searchCard {
+  background: #fff;
+  border-radius: 1.5rem;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  box-shadow: 0 10px 30px #00000014;
+}
+
+.Trains-module__IYMtEq__title {
+  color: #2563eb;
+  text-align: center;
+  letter-spacing: -.02em;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.Trains-module__IYMtEq__searchForm {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  display: grid;
+}
+
+.Trains-module__IYMtEq__select, .Trains-module__IYMtEq__input {
+  color: #334155;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 1rem;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  font-size: 1rem;
+  transition: all .3s;
+}
+
+.Trains-module__IYMtEq__select:focus, .Trains-module__IYMtEq__input:focus {
+  background: #fff;
+  border-color: #2563eb;
+  outline: none;
+  box-shadow: 0 0 0 3px #2563eb1a;
+}
+
+.Trains-module__IYMtEq__button {
+  color: #fff;
+  cursor: pointer;
+  letter-spacing: .02em;
+  background: #2563eb;
+  border: none;
+  border-radius: 1rem;
+  grid-column: 1 / -1;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all .3s;
+}
+
+.Trains-module__IYMtEq__button:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px #2563eb33;
+}
+
+.Trains-module__IYMtEq__button:disabled {
+  cursor: not-allowed;
+  background: #94a3b8;
+  transform: none;
+}
+
+.Trains-module__IYMtEq__tableWrapper {
+  border-radius: 1rem;
+  margin-top: 2rem;
+  overflow-x: auto;
+  box-shadow: 0 4px 20px #0000000d;
+}
+
+.Trains-module__IYMtEq__table {
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 1rem;
+  width: 100%;
+}
+
+.Trains-module__IYMtEq__tableHeader {
+  color: #1e40af;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  background: #eff6ff;
+  font-size: .875rem;
+  font-weight: 600;
+}
+
+.Trains-module__IYMtEq__tableHeader th {
+  text-align: left;
+  border-bottom: 2px solid #e2e8f0;
+  padding: 1.25rem 1rem;
+}
+
+.Trains-module__IYMtEq__tableCell {
+  color: #334155;
+  border-bottom: 1px solid #f1f5f9;
+  padding: 1rem;
+}
+
+.Trains-module__IYMtEq__trainRow {
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.Trains-module__IYMtEq__trainRow:hover {
+  background: #f8fafc;
+  transform: translateY(-1px);
+}
+
+.Trains-module__IYMtEq__trainNumber {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.Trains-module__IYMtEq__noTrains {
+  text-align: center;
+  color: #64748b;
+  padding: 3rem 1rem;
+  font-size: 1.1rem;
+}
+
+@media (width <= 768px) {
+  .Trains-module__IYMtEq__searchCard {
+    padding: 1.5rem;
+  }
+
+  .Trains-module__IYMtEq__title {
+    font-size: 2rem;
+  }
+
+  .Trains-module__IYMtEq__tableWrapper {
+    border-radius: 0;
+    margin: 1rem -1rem;
+  }
+}
+
+
+/*# sourceMappingURL=public_StyleSheet_17225175._.css.map*/

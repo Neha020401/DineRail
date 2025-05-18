@@ -1,6 +1,7 @@
+
 .wrapper {
   min-height: 100vh;
-  background: linear-gradient(to bottom right, #f8fafc, #e0f2fe, #e0e7ff);
+  /* background: linear-gradient(to bottom right, #f8fafc, #e0f2fe, #e0e7ff); */
   display: flex;
   flex-direction: column;
 }
