@@ -36,6 +36,12 @@ export default function TrainDetailsPage() {
       <Navbar />
       <h2 className="text-2xl mb-4">Train Details</h2>
       <TrainDetails train={train} />
+       <button 
+      onClick={() => router.push(`/trains/${train.train_number}/booking`)}
+      className="mt-4 p-2 bg-green-500 text-white"
+    >
+      Book Ticket
+    </button>
       <Footer />
     </div>
   );
