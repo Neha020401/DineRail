@@ -11,7 +11,7 @@ export default function BookingDetails() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/bookings/bookingDetail`)
+      .get(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/bookings`)
       .then((res) => {
         setBookings(res.data);
         setLoading(false);
@@ -22,14 +22,14 @@ export default function BookingDetails() {
       });
   }, []);
 
-  // if (loading)
-  //   return (
-  //     <>
-  //       <Navbar />
-  //     <center><div>Loading...</div></center>  
-  //       <Footer />
-  //     </>
-  //   );
+  if (loading)
+    return (
+      <>
+        <Navbar />
+      <center><div>Loading...</div></center>  
+        <Footer />
+      </>
+    );
   if (error) return <div>{error}</div>;
 
   return (
