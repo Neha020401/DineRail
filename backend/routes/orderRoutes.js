@@ -64,40 +64,20 @@ router.post("/order/place", authenticate("USER"), async (req, res) => {
   }
 });
 
-// Submit review and comment for a completed order
-router.patch("/:id/review", authenticate("USER"), async (req, res) => {
-  const { id } = req.params;
-  const { review, comment } = req.body;
-
-  if (!review || review < 1 || review > 5) {
-    return res.status(400).json({ message: "Review must be between 1 and 5" });
-  }
-
+router.get("/user", authenticate('USER'), async (req, res) => {
   try {
-    const [existing] = await db.execute(
-      "SELECT * FROM food_orders WHERE id = ? AND user_id = ?",
-      [id, req.user.id]
-    );
-    if (existing.length === 0) {
-      return res
-        .status(404)
-        .json({ message: "Order not found or unauthorized" });
-    }
+    const [orders] = await db.execute(`
+      SELECT fo.*, fi.name AS food_name, fi.image_url
+      FROM food_orders fo
+      JOIN food_items fi ON fo.food_item_id = fi.id
+      WHERE fo.user_id = ?
+      ORDER BY fo.created_at DESC
+    `, [req.user.id]);
 
-    if (existing[0].status !== "DELIVERED") {
-      return res
-        .status(400)
-        .json({ message: "Can only review delivered orders" });
-    }
-
-    await db.execute(
-      "UPDATE food_orders SET review = ?, comment = ? WHERE id = ?",
-      [review, comment, id]
-    );
-
-    res.json({ message: "Review submitted successfully" });
+    res.json(orders);
   } catch (err) {
-    res.status(500).json({ error: "Failed to submit review" });
+    console.error("Error fetching user orders:", err);
+    res.status(500).json({ error: "Failed to fetch user orders" });
   }
 });
 

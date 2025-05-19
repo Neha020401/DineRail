@@ -44,8 +44,6 @@ app.use("/api/payments", paymentRoutes);
 app.use("/api/food-items", foodRoutes);
 app.use("/api/food-review",reviewRoutes)
 
-
-
 // Home route
 app.get("/", (req, res) => {
   res.send("Train Reservation + Food Service Backend is Running");
