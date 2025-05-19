@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 15, "column": 0}, "map": {"version":3,"sources":["file://C%3A/Users/tanu/Documents/New%20folder/RailRoamer/railroamer/src/pages/_app.js"],"sourcesContent":["import '../../public/StyleSheet/global.css';\r\nimport '../../public/StyleSheet/Footer.css'\r\nfunction MyApp({ Component, pageProps }) {\r\n  return <Component {...pageProps} />;\r\n}\r\n\r\nexport default MyApp;"],"names":[],"mappings":";;;;;;;AAEA,SAAS,MAAM,EAAE,SAAS,EAAE,SAAS,EAAE;IACrC,qBAAO,qKAAC;QAAW,GAAG,SAAS;;;;;;AACjC;uCAEe","debugId":null}}]
-}
