@@ -1,3 +1,4 @@
+//frontend/pages/trains/[trainId]/booking.js 
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
