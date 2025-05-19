@@ -53,7 +53,7 @@ router.get("/:id", async (req, res) => {
     `,
       [foodId]
     );
-
+     console.log(foodId);
     if (items.length === 0) {
       return res.status(404).json({ error: "Food item not found" });
     }

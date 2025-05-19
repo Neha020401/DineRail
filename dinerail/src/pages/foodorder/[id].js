@@ -25,7 +25,14 @@ export default function OrderPage() {
 
   const handleOrder = async () => {
   // Check if all fields are filled
-  if (!order.quantity || !order.train_name || !order.train_no || !order.seat_number) {
+  if (
+    !food.provider_id ||   // Use food object for provider_id
+    !food.id ||            // Use food object for food_item_id
+    !order.quantity ||
+    !order.train_no ||
+    !order.train_name ||
+    !order.seat_number
+  ) {
     alert("Missing fields required");
     return;
   }
@@ -42,7 +49,7 @@ export default function OrderPage() {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/orders/place`,
+      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/order/place`,
       {
         method: "POST",
         headers: {
@@ -50,18 +57,18 @@ export default function OrderPage() {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify({
-          food_item_id: food.id,
-          provider_id: food.provider_id,
+          provider_id: food.provider_id,   // Corrected to use food object
+          food_item_id: food.id,           // Corrected to use food object
           quantity: Number(order.quantity), // Convert to number
-          train_name: order.train_name,
           train_no: order.train_no,
+          train_name: order.train_name,
           seat_number: order.seat_number,
         }),
       }
     );
 
     const data = await res.json();
-    if (data.order_id) {
+    if (res.ok) {
       await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/payments/food/pay`,
         {
@@ -79,14 +86,13 @@ export default function OrderPage() {
       alert("Order placed and paid successfully!");
       router.push("/orders");
     } else {
-      alert(data.message);
+      alert(data.message || "Failed to place order");
     }
   } catch (error) {
     console.error("Error placing order:", error);
     alert("An error occurred while placing the order.");
   }
 };
-
 
   if (!food) return <p>Loading...</p>;
 
