@@ -1,3 +1,5 @@
+//frontend/src/pages/bookings/
+
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import api from '../../utils/api';
