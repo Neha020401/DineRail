@@ -104,4 +104,65 @@
   .starFilled {
     color: #f59e0b; /* Amber - filled star */
   }
-  
+
+  .reviewSection {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #fafafa;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+}
+
+.sectionTitle {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #333;
+  border-bottom: 2px solid #0077ff;
+  padding-bottom: 0.25rem;
+}
+
+.singleReview {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.singleReview:last-child {
+  border-bottom: none;
+}
+
+.userImg {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #00a6ff;
+}
+
+.singleReview > div {
+  flex: 1;
+}
+
+.singleReview strong {
+  font-size: 1.1rem;
+  color: #00a6ff;
+}
+
+.singleReview p {
+  margin: 0.25rem 0;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #adc7d2;
+  border-radius: 6px;
+  resize: vertical;
+  margin-bottom: 1rem;
+}

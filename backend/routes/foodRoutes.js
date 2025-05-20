@@ -38,6 +38,7 @@ router.get("/:id", async (req, res) => {
       SELECT 
         fi.id,
         fi.name AS food_name,
+        fi.provider_id,
         fi.provider_name,
         fi.price,
         fi.image_url,

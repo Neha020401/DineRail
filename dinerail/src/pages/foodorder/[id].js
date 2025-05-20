@@ -19,12 +19,15 @@ export default function OrderPage() {
     if (id) {
       fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/food-items/${id}`)
         .then((res) => res.json())
-        .then((data) => setFood(data));
+        .then((data) => {
+          setFood(data)
+        });
     }
   }, [id]);
 
   const handleOrder = async () => {
   // Check if all fields are filled
+
   if (
     !food.provider_id ||   // Use food object for provider_id
     !food.id ||            // Use food object for food_item_id
@@ -37,19 +40,9 @@ export default function OrderPage() {
     return;
   }
 
-  // Log the order details for debugging
-  console.log("Order details:", {
-    food_item_id: food.id,
-    provider_id: food.provider_id,
-    quantity: Number(order.quantity), // Ensuring quantity is a number
-    train_name: order.train_name,
-    train_no: order.train_no,
-    seat_number: order.seat_number,
-  });
-
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/order/place`,
+      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/orders/order/place`,
       {
         method: "POST",
         headers: {
