@@ -135,7 +135,7 @@ export default function OrderPage() {
             className={styles.input}
           />
           <button onClick={handleOrder} className={styles.orderButton}>
-            Place Order & Pay
+            Place Order 
           </button>
         </div>
       </div>
