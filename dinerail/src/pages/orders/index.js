@@ -48,7 +48,7 @@ export default function UserOrders() {
         {orders.length === 0 ? (
           <p>No orders found.</p>
         ) : (
-          <div className={styles.ordersList}>
+          <div className={styles.ordersList} x>
             {orders.map((order) => (
               <div key={order.id} className={styles.orderCard}>
                 <img
@@ -57,6 +57,7 @@ export default function UserOrders() {
                   className={styles.image}
                 />
                 <div>
+                  <div style={{ display:"block",position:"relative"}}>
                   <h2 className={styles.subtitle}>{order.food_name}</h2>
                   <p className={styles.description}>
                     Train: {order.train_name} ({order.train_no})
@@ -73,6 +74,7 @@ export default function UserOrders() {
                   <p className={styles.description}>
                     Status: <strong>{order.status}</strong>
                   </p>
+                  </div>
                 </div>
               </div>
             ))}

@@ -16,7 +16,10 @@ const Hero = () => {
       <div className="container mx-auto px-4 py-24 sm:py-32 relative z-10 text-center">
         <h1 className="text-4xl font-extrabold text-white sm:text-5xl md:text-6xl">
           <span className="block">Travel and Dine</span>
-          <span className="block text-yellow-300">with RailFood</span>
+          <span className="block">Travel and Dine</span>
+          <span className="block text-yellow-300">Travel and Dine With DineRail 
+             </span>
+             
         </h1>
         <p className="mt-6 max-w-lg mx-auto text-xl text-white/80 sm:max-w-3xl">
           Book train tickets and order delicious food for your journey. Enjoy hassle-free travel with premium comfort and taste.

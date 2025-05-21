@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Navbar from '../components/Navbar';
+import Footer from '@/components/Footer';
 import styles from '../../public/StyleSheet/train-statue.module.css'; // Import custom CSS file
+// import Trains from './train';
 
 export default function TrainStatus() {
   const searchParams = useSearchParams();
@@ -60,6 +62,7 @@ export default function TrainStatus() {
   return (
     <>
       <Navbar />
+    
       <div className={styles.container}>
         <div className={styles.card}>
           <h2 className={styles.heading}>Live Train Status</h2>
@@ -161,6 +164,8 @@ export default function TrainStatus() {
           </div>
         )}
       </div>
+      
+      <Footer/>
     </>
   );
 }

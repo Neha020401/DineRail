@@ -53,7 +53,7 @@ export default function Navbar() {
               <Utensils className="h-4 w-4" />
               Food
             </Link>
-            <Link href="/train-status" className="text-gray-700 hover:text-blue-600 flex items-center gap-1">
+            <Link href="/train" className="text-gray-700 hover:text-blue-600 flex items-center gap-1">
               <Train className="h-4 w-4" />
               Train Status
             </Link>
