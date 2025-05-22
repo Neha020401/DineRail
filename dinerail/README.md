@@ -34,3 +34,21 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+
+create a .env.local file in frontend(dinerail folder)
+    # NEXT_PUBLIC_RAPIDAPI_KEY=yourrapidapikey 
+    PORT=5000
+    NEXT_PUBLIC_BACKEND_BASE_URL = http://localhost:5000/api
+    NEXT_PUBLIC_IMAGE_URL = http://localhost:5000
+
+
+create a .env file in backend 
+   DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=Neha@9372
+DB_NAME=railroamer
+
+JWT_SECRET=your_JWT_Token
