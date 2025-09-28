@@ -58,6 +58,9 @@ JWT_SECRET=your_jwt_secret
 # Server 
 PORT=5000
 NEXT_PUBLIC_API_URL=http://localhost:5000/api
+
+# RapidApi key
+NEXT_PUBLIC_RAPIDAPI_KEY=Yourrapidapikey
 ```
 
 ### 4. Database Setup
