@@ -55,9 +55,9 @@ DB_NAME=dinerail
 # JWT / Session
 JWT_SECRET=your_jwt_secret
 
-# Server
+# Server 
 PORT=5000
-NEXT_PUBLIC_API_URL=http://localhost:5000
+NEXT_PUBLIC_API_URL=http://localhost:5000/api
 ```
 
 ### 4. Database Setup
@@ -72,6 +72,8 @@ CREATE DATABASE dinerail;
 # Backend
 cd backend
 npm run dev
+# or
+npm start
 
 # Frontend
 cd frontend
