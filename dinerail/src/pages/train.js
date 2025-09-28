@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import styles from '../../public/StyleSheet/Trains.module.css'; 
+import Navbar from "@/components/Navbar";
 
 export default function Trains() {
   const [trains, setTrains] = useState([]);
@@ -86,7 +87,7 @@ export default function Trains() {
 
   return (
     <>
-   
+   <Navbar/>
       <div className={styles.container}>
         <div className={styles.formContainer}>
           <h1 className={styles.title}>🚆 Find Trains Between Stations</h1>

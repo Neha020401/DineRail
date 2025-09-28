@@ -1,3 +1,5 @@
+import Navbar from "./Navbar";
+
 // components/TrainDetails.js
 export function TrainDetails({ train }) {
   // Safely access running_days and coaches with fallback to empty arrays
@@ -11,6 +13,6 @@ export function TrainDetails({ train }) {
       <p>To: {train.destination_station}</p>
       <p>Running Days: {runningDays}</p>
       <p>Coaches: {coaches}</p>
-    </div>
+    </div>   
   );
 }

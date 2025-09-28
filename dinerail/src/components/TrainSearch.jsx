@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'; // for client-side navigation in Ne
 import { Search, Train } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import Navbar from './Navbar';
 
 const TrainSearch = () => {
   const [trainNumber, setTrainNumber] = useState('');
@@ -88,7 +89,7 @@ const TrainSearch = () => {
       <div className="mt-4 text-sm text-gray-500">
         <p>Search by train number or name to find food options available for your journey.</p>
       </div>
-    </div>
+    </div>  
   );
 };
 
