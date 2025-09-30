@@ -96,6 +96,13 @@ You can explore and test the API using the Postman collection:
 [🔗 Postman Collection](https://nehayadav-9281583.postman.co/workspace/Neha-Yadav's-Workspace~07360df9-d2f0-4016-84e1-76d0b5046ea5/collection/44595837-0acf8aef-925c-4d73-a817-eb21be9d16aa?action=share&creator=44595837)
 
 ---
+---
+
+## Confluence Collection
+You can explore some more of the collection databases and postman in my confluence space 
+[🔗 confluence space](https://yadavneha0401-1746091905606.atlassian.net/wiki/x/wAEB)
+
+---
 
 ## 🗄️ Database Schema
 
